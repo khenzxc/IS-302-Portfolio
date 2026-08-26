@@ -25,24 +25,24 @@ export default function About() {
               </p>
             </div>
 
-            {/* Course Meta Info Chips */}
-            <div className="flex flex-wrap gap-2 text-xs font-medium text-slate-800">
-              <span className="px-3 py-1 bg-slate-100 border border-slate-200 rounded-full">
-                <strong className="text-black">College:</strong> CICT
+            {/* Compact Course Meta Info Chips - 2 columns on mobile, flex row on sm+ */}
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 text-[11px] font-medium text-slate-700">
+              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left">
+                <strong className="text-slate-900">College:</strong> CICT
               </span>
-              <span className="px-3 py-1 bg-slate-100 border border-slate-200 rounded-full">
-                <strong className="text-black">Program:</strong> BSIS
+              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left">
+                <strong className="text-slate-900">Program:</strong> BSIS
               </span>
-              <span className="px-3 py-1 bg-slate-100 border border-slate-200 rounded-full">
-                <strong className="text-black">Pre-requisite:</strong> IS 207
+              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left">
+                <strong className="text-slate-900">Pre-req:</strong> IS 207
               </span>
-              <span className="px-3 py-1 bg-slate-100 border border-slate-200 rounded-full">
-                <strong className="text-black">Faculty:</strong> Dr. Josephine R. Bayonito
+              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left">
+                <strong className="text-slate-900">Faculty:</strong> Dr. J. Bayonito
               </span>
             </div>
 
             {/* Course Description */}
-            <div className="p-0 mt-2">
+            <div className="p-0 mt-1">
               <h3 className="text-base sm:text-lg font-bold text-black mb-2">
                 Course Description
               </h3>
