@@ -37,7 +37,7 @@ export default function About() {
                 <strong className="text-slate-900">Pre-req:</strong> IS 207
               </span>
               <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left">
-                <strong className="text-slate-900">Faculty:</strong> Dr. J. Bayonito
+                <strong className="text-slate-900">Faculty:</strong> Dr. Josephine Bayonito
               </span>
             </div>
 
