@@ -18,7 +18,7 @@ export default function About() {
                 Overview
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-black mb-1">
-                About the Course & Project
+                About the Course
               </h2>
               <p className="text-gray-600 text-sm font-semibold">
                 IS 302 • Business Process Management (BPM)
