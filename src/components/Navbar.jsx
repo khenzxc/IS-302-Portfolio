@@ -26,7 +26,7 @@ export default function Navbar() {
             <div className="w-8 h-8 rounded-lg bg-blue-600/90 backdrop-blur-md flex items-center justify-center text-white shadow-md shadow-blue-500/20">
               <Zap className="w-4 h-4 fill-white" />
             </div>
-            <span>IS-302 <span className="text-blue-600">PORTFOLIO</span></span>
+            <span>In<span className="text-blue-600">Sight</span></span>
           </a>
 
           {/* Desktop Navigation */}
