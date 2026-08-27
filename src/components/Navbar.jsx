@@ -11,13 +11,13 @@ export default function Navbar() {
   ];
 
   return (
-    // Full width header, nakadikit sa pinakataas
-    <header className="sticky top-0 left-0 right-0 z-50 w-full font-['Plus_Jakarta_Sans',-apple-system,sans-serif]">
+    // Mobile: Standard top-dikit full width | Desktop (md): Floating padding sa taas
+    <header className="sticky top-0 z-50 w-full md:pt-6 md:px-8 font-['Plus_Jakarta_Sans',-apple-system,sans-serif] pointer-events-none">
       
-      {/* Katamtamang top at bottom padding (py-4 sm:py-5) */}
-      <div className="w-full backdrop-blur-xl bg-white/70 border-b border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] px-4 sm:px-8 py-4 sm:py-5 transition-all relative">
+      {/* Top Navbar Container - Laging GLASSMORPISM (Hindi nagbabago) */}
+      <div className="w-full md:max-w-7xl mx-auto backdrop-blur-xl bg-white/80 md:bg-white/70 border-b md:border border-white/60 shadow-sm md:shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] md:rounded-2xl px-4 sm:px-6 md:px-5 py-3 transition-all pointer-events-auto relative">
         
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="flex items-center justify-between">
           {/* Brand Logo */}
           <a 
             href="#" 
@@ -59,9 +59,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ================= MOBILE MENU OVERLAY ================= */}
+        {/* ================= LINK CONTAINER ONLY: SOLID WHITE ================= */}
         {isOpen && (
-          <div className="absolute top-full left-0 right-0 w-full bg-white/95 backdrop-blur-2xl border-b border-slate-200/60 shadow-xl p-5 md:hidden transition-all duration-200 ease-out z-50">
+          <div className="absolute top-full left-0 right-0 w-full bg-white border-b border-slate-200/80 shadow-2xl p-5 md:hidden transition-all duration-200 ease-out z-50">
             <nav className="flex flex-col gap-1.5 mb-3">
               {navItems.map((item) => (
                 <a
