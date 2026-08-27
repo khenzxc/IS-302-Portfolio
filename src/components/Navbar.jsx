@@ -11,13 +11,13 @@ export default function Navbar() {
   ];
 
   return (
-    // Top wrapper with padding to push the navbar down from the top edge
-    <header className="sticky top-0 z-50 pt-4 sm:pt-6 px-4 sm:px-8 font-['Plus_Jakarta_Sans',-apple-system,sans-serif] pointer-events-none">
+    // Full width header, nakadikit sa pinakataas
+    <header className="sticky top-0 left-0 right-0 z-50 w-full font-['Plus_Jakarta_Sans',-apple-system,sans-serif]">
       
-      {/* Glassmorphic Navbar Capsule */}
-      <div className="max-w-7xl mx-auto backdrop-blur-xl bg-white/70 border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] rounded-2xl px-5 py-3 transition-all pointer-events-auto relative">
+      {/* Katamtamang top at bottom padding (py-4 sm:py-5) */}
+      <div className="w-full backdrop-blur-xl bg-white/70 border-b border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] px-4 sm:px-8 py-4 sm:py-5 transition-all relative">
         
-        <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Brand Logo */}
           <a 
             href="#" 
@@ -59,9 +59,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ================= FLOATING GLASS OVERLAY MENU FOR MOBILE ================= */}
+        {/* ================= MOBILE MENU OVERLAY ================= */}
         {isOpen && (
-          <div className="absolute top-[calc(100%+0.75rem)] left-0 right-0 w-full bg-white/80 backdrop-blur-2xl border border-white/60 shadow-xl rounded-2xl p-5 md:hidden transition-all duration-200 ease-out z-50">
+          <div className="absolute top-full left-0 right-0 w-full bg-white/95 backdrop-blur-2xl border-b border-slate-200/60 shadow-xl p-5 md:hidden transition-all duration-200 ease-out z-50">
             <nav className="flex flex-col gap-1.5 mb-3">
               {navItems.map((item) => (
                 <a
