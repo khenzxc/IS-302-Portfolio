@@ -12,26 +12,26 @@ const DEFAULT_MEMBERS = [
     {
         id: 2,
         name: "Khen Vonoe Gabriel",
-        role: "Lead Software Engineer",
+        role: "Visual Creator",
         image: "/khen.webp",
     },
     {
         id: 3,
-        name: "Simon Paul Bolus",
-        role: "Lead Software Engineer",
-        image: "/simon.webp",
+        name: "Eldon Rex Santos",
+        role: "Lead Researcher",
+        image: "/eldon.webp",
     },
     {
         id: 4,
         name: "Kaiross Gabriel Sta Ana",
-        role: "Marketing Director",
+        role: "Project Checker",
         image: "/kaiross.webp",
     },
     {
         id: 5,
-        name: "Eldon Rex Santos",
-        role: "Head of Product Design",
-        image: "/eldon.webp",
+        name: "Simon Paul Bolus",
+        role: "Lead Writer",
+        image: "/simon.webp",
     },
 ]
 

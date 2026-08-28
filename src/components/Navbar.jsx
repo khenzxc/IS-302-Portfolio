@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, Zap, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,19 +13,21 @@ export default function Navbar() {
   return (
     // Mobile: Standard top-dikit full width | Desktop (md): Floating padding sa taas
     <header className="sticky top-0 z-50 w-full md:pt-6 md:px-8 font-['Plus_Jakarta_Sans',-apple-system,sans-serif] pointer-events-none">
-      
+
       {/* Top Navbar Container - Laging GLASSMORPISM (Hindi nagbabago) */}
       <div className="w-full md:max-w-7xl mx-auto backdrop-blur-xl bg-white/80 md:bg-white/70 border-b md:border border-white/60 shadow-sm md:shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] md:rounded-2xl px-4 sm:px-6 md:px-5 py-3 transition-all pointer-events-auto relative">
-        
+
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
-          <a 
-            href="#" 
-            className="font-black text-lg sm:text-xl tracking-tight text-slate-900 flex items-center gap-2 hover:opacity-80 transition-opacity"
+          <a
+            href="#"
+            className="font-black text-lg sm:text-xl tracking-tight text-slate-900 flex items-center gap-0.5 hover:opacity-80 transition-opacity"
           >
-            <div className="w-8 h-8 rounded-lg bg-blue-600/90 backdrop-blur-md flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-              <Zap className="w-4 h-4 fill-white" />
-            </div>
+            <img
+              src="/insight-logo.png"
+              alt="InSight"
+              className="h-10 w-auto object-contain"
+            />
             <span>In<span className="text-blue-600">Sight</span></span>
           </a>
 
