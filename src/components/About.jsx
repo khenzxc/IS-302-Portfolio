@@ -1,3 +1,35 @@
+import { motion } from "framer-motion";
+
+// Animation Variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, x: 25 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
 export default function About() {
   return (
     <section 
@@ -10,10 +42,16 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           
           {/* LEFT SIDE: Course Meta & Description */}
-          <div className="flex flex-col gap-5">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col gap-5"
+          >
             
             {/* Section Header */}
-            <div>
+            <motion.div variants={itemVariants}>
               <span className="text-xs font-bold text-blue-600 uppercase tracking-widest block mb-1.5">
                 Overview
               </span>
@@ -23,26 +61,26 @@ export default function About() {
               <p className="text-gray-600 text-sm font-semibold">
                 IS 302 • Business Process Management (BPM)
               </p>
-            </div>
+            </motion.div>
 
-            {/* Compact Course Meta Info Chips - 2 columns on mobile, flex row on sm+ */}
-            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 text-[11px] font-medium text-slate-700">
-              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left">
+            {/* Compact Course Meta Info Chips */}
+            <motion.div variants={itemVariants} className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 text-[11px] font-medium text-slate-700">
+              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left transition-transform hover:scale-105">
                 <strong className="text-slate-900">College:</strong> CICT
               </span>
-              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left">
+              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left transition-transform hover:scale-105">
                 <strong className="text-slate-900">Program:</strong> BSIS
               </span>
-              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left">
+              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left transition-transform hover:scale-105">
                 <strong className="text-slate-900">Pre-req:</strong> IS 207
               </span>
-              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left">
+              <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left transition-transform hover:scale-105">
                 <strong className="text-slate-900">Faculty:</strong> Dr. Josephine Bayonito
               </span>
-            </div>
+            </motion.div>
 
             {/* Course Description */}
-            <div className="p-0 mt-1">
+            <motion.div variants={itemVariants} className="p-0 mt-1">
               <h3 className="text-base sm:text-lg font-bold text-black mb-2">
                 Course Description
               </h3>
@@ -52,38 +90,56 @@ export default function About() {
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                 Students explore business process modeling techniques, performance measurement frameworks, and process improvement strategies such as reengineering and continuous improvement to contribute to data-driven decision-making and digital transformation initiatives.
               </p>
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
           {/* RIGHT SIDE: Key Highlights (01, 02, 03) */}
-          <div className="flex flex-col gap-4">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col gap-4"
+          >
             
-            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
+            <motion.div 
+              variants={cardVariants}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all cursor-default"
+            >
               <span className="text-xl font-black text-blue-600 block mb-1">01</span>
               <h4 className="font-bold text-black text-sm sm:text-base mb-1">Process Modeling</h4>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                 Define, model, and analyze organizational workflows using industry standards.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
+            <motion.div 
+              variants={cardVariants}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all cursor-default"
+            >
               <span className="text-xl font-black text-blue-600 block mb-1">02</span>
               <h4 className="font-bold text-black text-sm sm:text-base mb-1">Process Improvement</h4>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                 Apply reengineering strategies and continuous improvement frameworks.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
+            <motion.div 
+              variants={cardVariants}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all cursor-default"
+            >
               <span className="text-xl font-black text-blue-600 block mb-1">03</span>
               <h4 className="font-bold text-black text-sm sm:text-base mb-1">Digital Alignment</h4>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                 Align information systems with strategic business goals for transformation.
               </p>
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
         </div>
 

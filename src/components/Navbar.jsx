@@ -6,7 +6,7 @@ export default function Navbar() {
 
   const navItems = [
     { href: "#", label: "Overview" },
-    { href: "#process", label: "Process Framework" },
+    { href: "#Projects", label: "Project" },
     { href: "#team", label: "Team Portfolio" },
   ];
 
