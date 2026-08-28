@@ -178,6 +178,9 @@ function TeamCoverflowGallery({
   const effectiveRadius = (Math.max(0, Math.min(20, radius)) / 20) * 24
   const dim = 1 - Math.max(0, Math.min(100, opacity)) / 100
 
+  // Order ng dots para sa visual display kung saan index 0 ang nasa gitna (pang-3rd dot)
+  const dotVisualOrder = [3, 4, 0, 1, 2]
+
   return (
     <div className="flex flex-col items-center w-full">
       {/* Coverflow Canvas */}
@@ -359,20 +362,20 @@ function TeamCoverflowGallery({
 
           {/* Pagination Dots */}
           <div className="flex items-center gap-2">
-            {list.map((_, idx) => (
+            {dotVisualOrder.map((targetIdx) => (
               <button
-                key={idx}
+                key={targetIdx}
                 onClick={() => {
                   if (lockRef.current) return
                   lock()
-                  setActive(idx)
+                  setActive(targetIdx)
                 }}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
-                  active === idx
+                  active === targetIdx
                     ? "w-7 bg-blue-600"
                     : "w-2.5 bg-slate-300 hover:bg-slate-400"
                 }`}
-                aria-label={`Go to slide ${idx + 1}`}
+                aria-label={`Go to slide ${targetIdx + 1}`}
               />
             ))}
           </div>
