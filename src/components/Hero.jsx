@@ -13,9 +13,13 @@ export default function Hero() {
             }}
             className="sticky top-16 z-0 overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 bg-gradient-to-b from-blue-50/50 via-white to-blue-50/30 text-gray-900 transition-transform duration-75 ease-out will-change-transform relative"
         >
-            {/* Soft Ambient Radial Blue Glows (Top/Middle & Bottom) */}
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl pointer-events-none z-0" />
-            <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-blue-100/30 rounded-full blur-3xl pointer-events-none z-0" />
+            {/* ================= VISIBLE AMBIENT BLUE GLOWS ================= */}
+            
+            {/* 1. Top/Center Primary Glow (Responsive Width/Height) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[650px] h-[85vw] max-h-[650px] bg-blue-200/50 sm:bg-blue-100/60 rounded-full blur-3xl pointer-events-none z-0" />
+
+            {/* 2. Bottom Secondary Glow (Adjusted Position per Screen Size) */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/3 w-[90vw] max-w-[550px] h-[40vw] max-h-[300px] bg-blue-200/40 sm:bg-blue-100/50 rounded-full blur-3xl pointer-events-none z-0" />
 
             {/* Subtle Blue Grid Lines Background */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#2563eb15_1px,transparent_1px),linear-gradient(to_bottom,#2563eb15_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
