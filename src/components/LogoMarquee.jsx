@@ -1,8 +1,8 @@
 export default function LogoMarquee() {
   const logos = [
-    { name: "CICT", src: "/cict-logo.png" },
-    { name: "BSIS", src: "/bsis-logo.png" },
-    { name: "BulSU", src: "/bulsu-logo.png" },
+    { name: "CICT", src: "/cict-logo.webp" },
+    { name: "BSIS", src: "/bsis-logo.webp" },
+    { name: "BulSU", src: "/bulsu-logo.webp" },
   ];
 
   const marqueeItems = [...logos, ...logos, ...logos, ...logos];

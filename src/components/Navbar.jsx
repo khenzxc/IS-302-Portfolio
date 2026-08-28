@@ -24,7 +24,7 @@ export default function Navbar() {
             className="font-black text-lg sm:text-xl tracking-tight text-slate-900 flex items-center gap-0.5 hover:opacity-80 transition-opacity"
           >
             <img
-              src="/insight-logo.png"
+              src="/insight-logo.webp"
               alt="InSight"
               className="h-10 w-auto object-contain"
             />
