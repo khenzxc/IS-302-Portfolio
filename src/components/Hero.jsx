@@ -33,15 +33,19 @@ const floatingIconVariants = {
 };
 
 export default function Hero() {
-    const { opacity, blur, scale } = useScrollEffects();
+    const { opacity, blur, scale, isMobile } = useScrollEffects();
+
+    const heroStyle = isMobile
+        ? { opacity, transform: `scale(${scale})` }
+        : {
+            opacity,
+            filter: `blur(${blur}px)`,
+            transform: `scale(${scale})`,
+          };
 
     return (
         <section
-            style={{
-                opacity,
-                filter: `blur(${blur}px)`,
-                transform: `scale(${scale})`,
-            }}
+            style={heroStyle}
             className="sticky top-16 z-0 overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 bg-gradient-to-b from-blue-50/50 via-white to-blue-50/30 text-gray-900 transition-transform duration-75 ease-out will-change-transform relative"
         >
             {/* ================= VISIBLE AMBIENT BLUE GLOWS ================= */}

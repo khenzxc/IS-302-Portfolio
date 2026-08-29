@@ -2,16 +2,60 @@ import { useState, useEffect } from "react";
 
 export function useScrollEffects(maxBlur = 12, fadeDistance = 500) {
   const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false
+  );
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const updateViewport = () => setIsMobile(window.innerWidth <= 768);
+
+    const handleScroll = () => {
+      if (prefersReducedMotion) {
+        setScrollY(0);
+        return;
+      }
+
+      window.requestAnimationFrame(() => {
+        setScrollY(window.scrollY || 0);
+      });
+    };
+
+    if (prefersReducedMotion) {
+      setScrollY(0);
+      return () => {};
+    }
+
+    updateViewport();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", updateViewport);
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updateViewport);
+    } else if (typeof mediaQuery.addListener === "function") {
+      mediaQuery.addListener(updateViewport);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateViewport);
+      if (typeof mediaQuery.removeEventListener === "function") {
+        mediaQuery.removeEventListener("change", updateViewport);
+      } else if (typeof mediaQuery.removeListener === "function") {
+        mediaQuery.removeListener(updateViewport);
+      }
+    };
   }, []);
 
   const opacity = Math.max(1 - scrollY / fadeDistance, 0);
-  const blur = Math.min(scrollY / (fadeDistance / maxBlur), maxBlur);
-  const scale = Math.max(1 - scrollY / (fadeDistance * 5), 0.92);
+  const blur = isMobile
+    ? Math.min(scrollY / (fadeDistance / maxBlur), maxBlur) * 0.35
+    : Math.min(scrollY / (fadeDistance / maxBlur), maxBlur);
+  const scale = isMobile
+    ? Math.max(1 - scrollY / (fadeDistance * 7), 0.96)
+    : Math.max(1 - scrollY / (fadeDistance * 5), 0.92);
 
-  return { opacity, blur, scale };
+  return { opacity, blur, scale, isMobile };
 }
