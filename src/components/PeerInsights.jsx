@@ -6,16 +6,16 @@ const TOP_ROW_INSIGHTS = [
   {
     id: 1,
     quote: "Designing BPMN 2.0 diagrams helped us clearly visualize bottlenecks and streamline complex organizational workflows.",
-    name: "Samantha Johnson",
-    role: "Project Reviewer, IS-302",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop",
+    name: "Khen Gabriel",
+    role: "Visual Creator, Team 1",
+    avatar: "khen.webp",
   },
   {
     id: 2,
     quote: "Understanding As-Is and To-Be process modeling was a game changer for eliminating redundant manual steps in our system.",
-    name: "Isabella Rodriguez",
-    role: "Lead Evaluator, IS-302",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop",
+    name: "Eldon Santos",
+    role: "Lead Researcher, Team 1",
+    avatar: "eldon.webp"
   },
   {
     id: 3,
@@ -30,23 +30,23 @@ const BOTTOM_ROW_INSIGHTS = [
   {
     id: 4,
     quote: "Integrating automation into business processes taught us how to significantly reduce cycle times and human error.",
-    name: "Alex Mercer",
-    role: "Systems Analyst, IS-302",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
+    name: "Yuki Ezekiel",
+    role: "Team Leader, Team 1",
+    avatar: "yuki.webp"
   },
   {
     id: 5,
     quote: "Aligning Key Performance Indicators (KPIs) with process goals proved essential for measuring continuous improvement.",
-    name: "Victoria Thompson",
-    role: "UI/UX Reviewer, IS-302",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop",
+    name: "Simon Bolus",
+    role: "Lead Writer, Team 1",
+    avatar: "simon.webp"
   },
   {
     id: 6,
     quote: "Standardizing workflows ensures seamless cross-functional collaboration between IT infrastructure and business units.",
-    name: "John Peter",
-    role: "Technical Lead, IS-302",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
+    name: "Kairos Sta Ana",
+    role: "Project Checker, Team 1",
+    avatar: "kaiross.webp",
   },
   {
     id: 7,
@@ -82,7 +82,7 @@ export default function PeerInsights() {
   const handleMobileTouch = (row, e) => {
     if (window.matchMedia("(pointer: coarse)").matches) {
       e.stopPropagation();
-      
+
       if (row === 1) {
         setIsPausedRow1((prev) => !prev);
       } else {
