@@ -1,43 +1,44 @@
-import { Layers, Database, Workflow, ShieldCheck } from "lucide-react";
+"use client";
+
 import { motion } from "framer-motion";
 
 const FEATURED_WORKS = [
   {
     id: "01",
-    title: "Sagana Web Application",
-    category: "Full-Stack System",
-    desc: "A web platform designed to streamline supply chain workflows and inventory operations for agricultural distribution.",
-    icon: Layers,
-    tags: ["React", "Tailwind CSS", "Node.js"],
+    title: "Lorem Ipsum Dolor Sit Amet",
+    category: "Consectetur Adipiscing",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
+    link: "#",
   },
   {
     id: "02",
-    title: "Business Process Modeling",
-    category: "BPMN & DFD Framework",
-    desc: "Comprehensive As-Is and To-Be process models mapping out organizational workflows and data movement.",
-    icon: Workflow,
-    tags: ["BPMN 2.0", "Data Flow Diagram", "Process Mapping"],
+    title: "Sed Do Eiusmod Tempor",
+    category: "Magna Aliqua Ut",
+    desc: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
+    link: "#",
   },
   {
     id: "03",
-    title: "Database & ERD Design",
-    category: "System Architecture",
-    desc: "Normalized entity-relationship schemas structured with explicit business rules for reliable data consistency.",
-    icon: Database,
-    tags: ["ERD", "SQL Schema", "Business Rules"],
+    title: "Duis Aute Irure Dolor",
+    category: "Voluptate Velit Esse",
+    desc: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=1000&auto=format&fit=crop",
+    link: "#",
   },
   {
     id: "04",
-    title: "Financial & Efficiency Report",
-    category: "Process Analytics",
-    desc: "In-depth financial ratio analysis and cost-benefit evaluations driving data-informed business transformation.",
-    icon: ShieldCheck,
-    tags: ["WACC", "Profitability Ratios", "BPM Metrics"],
+    title: "Excepteur Sint Occaecat",
+    category: "Sunt In Culpa",
+    desc: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1000&auto=format&fit=crop",
+    link: "#",
   },
 ];
 
-// Super-Smooth Ease Curve & Transition Configs
-const SMOOTH_EASE = [0.16, 1, 0.3, 1]; // Smooth Ease-Out Curve (mala-Apple/Framer style)
+// Transition Configs
+const SMOOTH_EASE = [0.16, 1, 0.3, 1];
 
 const headerVariants = {
   hidden: { opacity: 0, y: -15 },
@@ -56,7 +57,7 @@ const gridContainerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12, // Bahagyang sunod-sunod lang para natural
+      staggerChildren: 0.12,
       delayChildren: 0.1,
     },
   },
@@ -79,11 +80,14 @@ export default function FeaturedWorks() {
   return (
     <section 
       id="works" 
-      className="relative z-10 bg-[#030e21] py-20 text-white border-t border-slate-800/80"
+      className="relative z-10 bg-[#071938] py-20 text-white border-t border-blue-900/60 overflow-hidden"
     >
+      {/* Background Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-sky-500/15 rounded-full blur-[130px] pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* Header - Centered */}
+        {/* Header - Compact & Centered */}
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -91,13 +95,13 @@ export default function FeaturedWorks() {
           variants={headerVariants}
           className="max-w-2xl mb-12 text-center mx-auto"
         >
-          <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block mb-1.5">
+          <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block mb-1.5">
             Portfolio Highlights
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">
             Featured Works
           </h2>
-          <p className="text-xs sm:text-sm text-blue-200/70">
+          <p className="text-xs sm:text-sm text-sky-100/70">
             A showcase of core systems, process models, and analytical frameworks developed for IS-302.
           </p>
         </motion.div>
@@ -110,61 +114,64 @@ export default function FeaturedWorks() {
           variants={gridContainerVariants}
           className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
         >
-          {FEATURED_WORKS.map((work) => {
-            const IconComponent = work.icon;
-            return (
-              <motion.div 
-                key={work.id}
-                variants={cardVariants}
-                whileHover={{ 
-                  y: -6, 
-                  transition: { type: "spring", stiffness: 300, damping: 20 } 
-                }}
-                className="group p-6 rounded-2xl bg-[#0a1835]/80 border border-blue-900/50 shadow-md hover:border-blue-500/50 hover:bg-[#0a1835] hover:shadow-blue-900/20 hover:shadow-xl transition-colors duration-300 backdrop-blur-sm flex flex-col justify-between"
-              >
-                <div>
-                  {/* Top Card Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xl font-black text-blue-400">
-                      {work.id}
-                    </span>
-                    <motion.div 
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                      className="p-2.5 rounded-xl bg-blue-950/60 text-blue-400 border border-blue-800/40 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300"
-                    >
-                      <IconComponent className="w-5 h-5" />
-                    </motion.div>
-                  </div>
+          {FEATURED_WORKS.map((work) => (
+            <motion.div 
+              key={work.id}
+              variants={cardVariants}
+              className="flex flex-col p-5 rounded-2xl bg-[#030d1e]/90 border border-sky-500/20 backdrop-blur-md shadow-xl hover:border-sky-400/50 transition-colors duration-300"
+            >
+              {/* Image Holder */}
+              <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl bg-slate-900 mb-5">
+                <img
+                  src={work.image}
+                  alt={work.title}
+                  draggable={false}
+                  className="w-full h-full object-cover object-center select-none"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030d1e]/90 via-transparent to-transparent pointer-events-none" />
+              </div>
 
-                  {/* Category & Title */}
-                  <span className="text-[10px] font-bold text-blue-300 uppercase tracking-wider block mb-1">
+              {/* Card Body */}
+              <div className="flex flex-col flex-grow justify-between">
+                <div className="mb-6">
+                  <span className="text-[10px] font-bold text-sky-400 uppercase tracking-wider block mb-1.5">
                     {work.category}
                   </span>
-                  <h3 className="font-bold text-base sm:text-lg text-white mb-2 group-hover:text-blue-200 transition-colors duration-300">
+                  
+                  <h3 className="font-bold text-base sm:text-lg text-white mb-2">
                     {work.title}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-xs sm:text-sm text-blue-100/70 leading-relaxed mb-5">
+                  <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed">
                     {work.desc}
                   </p>
                 </div>
 
-                {/* Badges / Tags */}
-                <div className="pt-4 border-t border-blue-900/40 flex flex-wrap gap-2">
-                  {work.tags.map((tag, tIdx) => (
-                    <span 
-                      key={tIdx} 
-                      className="px-2.5 py-1 rounded-md bg-blue-950/80 text-[11px] font-medium text-blue-200 border border-blue-800/30 transition-colors duration-300 hover:border-blue-500/50 hover:text-white"
+                {/* Call To Action (CTA) */}
+                <div className="pt-4 border-t border-sky-900/40 flex items-center justify-between">
+                  <a
+                    href={work.link}
+                    className="group inline-flex items-center text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors"
+                  >
+                    <span>View Details</span>
+                    <svg
+                      className="w-4 h-4 ml-1.5 transform transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      {tag}
-                    </span>
-                  ))}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </a>
                 </div>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
 
       </div>

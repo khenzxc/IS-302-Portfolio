@@ -29,7 +29,7 @@ const itemVariants = {
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 bg-white border-t border-slate-200 pt-16 pb-12 text-gray-900">
+    <footer className="relative z-10 bg-[#030e21] border-t border-slate-800/80 pt-16 pb-12 text-slate-300 font-['Plus_Jakarta_Sans',sans-serif]">
       <motion.div 
         className="max-w-7xl mx-auto px-6 relative z-10"
         variants={containerVariants}
@@ -41,32 +41,32 @@ export default function Footer() {
           
           {/* Left Side: Brand Details */}
           <motion.div variants={itemVariants} className="md:col-span-6 flex flex-col gap-2">
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">
+            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">
               Course Portfolio
             </span>
-            <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-black uppercase">
+            <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white uppercase">
               IS 302 • Business Process Management
             </h3>
-            <p className="text-xs sm:text-sm text-gray-600 font-medium">
+            <p className="text-xs sm:text-sm text-slate-400 font-medium">
               Team Portfolio Project • Academic Systems & Workflow Showcase
             </p>
           </motion.div>
 
           {/* Middle: Navigation Links */}
           <motion.div variants={itemVariants} className="md:col-span-3 flex flex-col gap-3">
-            <h4 className="text-xs font-bold text-black uppercase tracking-widest">
+            <h4 className="text-xs font-bold text-white uppercase tracking-widest">
               Resources
             </h4>
-            <div className="flex flex-col gap-2 text-xs font-semibold text-gray-600">
+            <div className="flex flex-col gap-2 text-xs font-semibold text-slate-400">
               <a
                 href="#works"
-                className="hover:text-blue-600 transition-colors w-fit"
+                className="hover:text-blue-400 transition-colors w-fit"
               >
                 Featured Works
               </a>
               <a
                 href="#insights"
-                className="hover:text-blue-600 transition-colors w-fit"
+                className="hover:text-blue-400 transition-colors w-fit"
               >
                 Peer Insights
               </a>
@@ -75,7 +75,7 @@ export default function Footer() {
 
           {/* Right: Social Links */}
           <motion.div variants={itemVariants} className="md:col-span-3 flex flex-col gap-3">
-            <h4 className="text-xs font-bold text-black uppercase tracking-widest">
+            <h4 className="text-xs font-bold text-white uppercase tracking-widest">
               Social
             </h4>
             
@@ -85,7 +85,7 @@ export default function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 flex items-center justify-center text-slate-700 hover:text-blue-600 transition-all hover:scale-105"
+                className="w-10 h-10 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-blue-400 transition-all hover:scale-105"
                 aria-label="Facebook"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 flex items-center justify-center text-slate-700 hover:text-blue-600 transition-all hover:scale-105"
+                className="w-10 h-10 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-blue-400 transition-all hover:scale-105"
                 aria-label="LinkedIn"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -111,7 +111,7 @@ export default function Footer() {
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 flex items-center justify-center text-slate-700 hover:text-blue-600 transition-all hover:scale-105"
+                className="w-10 h-10 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-blue-400 transition-all hover:scale-105"
                 aria-label="GitHub"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@ export default function Footer() {
               {/* Email */}
               <a
                 href="mailto:contact@example.com"
-                className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200/80 border border-slate-200/80 flex items-center justify-center text-slate-700 hover:text-blue-600 transition-all hover:scale-105"
+                className="w-10 h-10 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-blue-400 transition-all hover:scale-105"
                 aria-label="Email"
               >
                 <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
@@ -137,7 +137,7 @@ export default function Footer() {
         {/* Bottom Copyright */}
         <motion.div 
           variants={itemVariants}
-          className="mt-12 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs font-semibold text-gray-600 gap-3"
+          className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs font-semibold text-slate-400 gap-3"
         >
           <p>© {new Date().getFullYear()} BSIS 3A-G2 Team 1. All rights reserved.</p>
         </motion.div>
