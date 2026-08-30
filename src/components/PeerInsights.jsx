@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 
 const TOP_ROW_INSIGHTS = [
   {
@@ -61,15 +61,21 @@ export default function PeerInsights() {
   const [isPausedRow1, setIsPausedRow1] = useState(false);
   const [isPausedRow2, setIsPausedRow2] = useState(false);
 
-  const topRowRepeated = [...TOP_ROW_INSIGHTS, ...TOP_ROW_INSIGHTS, ...TOP_ROW_INSIGHTS];
-  const bottomRowRepeated = [...BOTTOM_ROW_INSIGHTS, ...BOTTOM_ROW_INSIGHTS, ...BOTTOM_ROW_INSIGHTS];
+  const topRowRepeated = useMemo(
+    () => [...TOP_ROW_INSIGHTS, ...TOP_ROW_INSIGHTS, ...TOP_ROW_INSIGHTS],
+    []
+  );
+  const bottomRowRepeated = useMemo(
+    () => [...BOTTOM_ROW_INSIGHTS, ...BOTTOM_ROW_INSIGHTS, ...BOTTOM_ROW_INSIGHTS],
+    []
+  );
+
+  const resumeAll = useCallback(() => {
+    setIsPausedRow1(false);
+    setIsPausedRow2(false);
+  }, []);
 
   useEffect(() => {
-    const resumeAll = () => {
-      setIsPausedRow1(false);
-      setIsPausedRow2(false);
-    };
-
     window.addEventListener("scroll", resumeAll, { passive: true });
     window.addEventListener("touchmove", resumeAll, { passive: true });
 
@@ -77,19 +83,20 @@ export default function PeerInsights() {
       window.removeEventListener("scroll", resumeAll);
       window.removeEventListener("touchmove", resumeAll);
     };
-  }, []);
+  }, [resumeAll]);
 
-  const handleMobileTouch = (row, e) => {
-    if (window.matchMedia("(pointer: coarse)").matches) {
-      e.stopPropagation();
+  const handleMobileTouch = useCallback((row, e) => {
+    if (!window.matchMedia("(pointer: coarse)").matches) return;
 
-      if (row === 1) {
-        setIsPausedRow1((prev) => !prev);
-      } else {
-        setIsPausedRow2((prev) => !prev);
-      }
+    e.stopPropagation();
+
+    if (row === 1) {
+      setIsPausedRow1((prev) => !prev);
+      return;
     }
-  };
+
+    setIsPausedRow2((prev) => !prev);
+  }, []);
 
   return (
     <section

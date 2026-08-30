@@ -1,5 +1,4 @@
 import Hero from "../components/Hero.jsx";
-import Process from "../components/Process.jsx";
 import Team from "../components/Team.jsx";
 import About from "../components/About.jsx";
 import FeaturedWorks from "../components/FeaturedWorks.jsx";

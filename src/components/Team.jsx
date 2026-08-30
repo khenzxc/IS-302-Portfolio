@@ -87,7 +87,9 @@ function TeamCoverflowGallery({
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
 
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 640 : false
+  )
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640)
