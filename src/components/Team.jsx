@@ -84,7 +84,6 @@ function TeamCoverflowGallery({
   const [active, setActive] = useState(0)
   const lockRef = useRef(false)
 
-  // Touch Swipe tracking states
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
 
@@ -130,7 +129,6 @@ function TeamCoverflowGallery({
     [autoplay, n, lock]
   )
 
-  // Handlers para sa Touch Drag / Swipe
   const handleTouchStart = (e) => {
     touchStartX.current = e.targetTouches[0].clientX
   }
@@ -142,13 +140,13 @@ function TeamCoverflowGallery({
   const handleTouchEnd = () => {
     if (!touchStartX.current || !touchEndX.current) return
     const distance = touchStartX.current - touchEndX.current
-    const isSwipe = Math.abs(distance) > 40 // minimum swipe distance threshold
+    const isSwipe = Math.abs(distance) > 40
 
     if (isSwipe) {
       if (distance > 0) {
-        step(1) // Swipe Left -> Next Card
+        step(1)
       } else {
-        step(-1) // Swipe Right -> Prev Card
+        step(-1)
       }
     }
 
@@ -178,12 +176,10 @@ function TeamCoverflowGallery({
   const effectiveRadius = (Math.max(0, Math.min(20, radius)) / 20) * 24
   const dim = 1 - Math.max(0, Math.min(100, opacity)) / 100
 
-  // Order ng dots para sa visual display kung saan index 0 ang nasa gitna (pang-3rd dot)
   const dotVisualOrder = [3, 4, 0, 1, 2]
 
   return (
     <div className="flex flex-col items-center w-full">
-      {/* Coverflow Canvas */}
       <div
         style={{
           position: "relative",
@@ -336,9 +332,7 @@ function TeamCoverflowGallery({
         </div>
       </div>
 
-      {/* Navigation Controls & Visual Indicators */}
       <div className="mt-6 flex flex-col items-center gap-3 relative z-20">
-        {/* Left / Right Arrow Buttons & Pagination Dots */}
         <div className="flex items-center gap-5">
           <button
             onClick={() => step(-1)}
@@ -360,7 +354,6 @@ function TeamCoverflowGallery({
             </svg>
           </button>
 
-          {/* Pagination Dots */}
           <div className="flex items-center gap-2">
             {dotVisualOrder.map((targetIdx) => (
               <button
@@ -401,7 +394,6 @@ function TeamCoverflowGallery({
           </button>
         </div>
 
-        {/* Text Hint para sa mobile swipe & click */}
         <span className="text-xs text-slate-400 font-medium tracking-wide">
           Swipe or click cards to navigate
         </span>

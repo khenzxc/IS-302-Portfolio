@@ -37,7 +37,6 @@ const FEATURED_WORKS = [
   },
 ];
 
-// Transition Configs
 const SMOOTH_EASE = [0.16, 1, 0.3, 1];
 
 const headerVariants = {
@@ -82,12 +81,9 @@ export default function FeaturedWorks() {
       id="works" 
       className="relative z-10 bg-[#071938] py-20 text-white border-t border-blue-900/60 overflow-hidden"
     >
-      {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-sky-500/15 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
-        {/* Header - Compact & Centered */}
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -106,7 +102,6 @@ export default function FeaturedWorks() {
           </p>
         </motion.div>
 
-        {/* 2 by 2 Cards Grid */}
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -120,7 +115,6 @@ export default function FeaturedWorks() {
               variants={cardVariants}
               className="flex flex-col p-5 rounded-2xl bg-[#030d1e]/90 border border-sky-500/20 backdrop-blur-md shadow-xl hover:border-sky-400/50 transition-colors duration-300"
             >
-              {/* Image Holder */}
               <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl bg-slate-900 mb-5">
                 <img
                   src={work.image}
@@ -131,7 +125,6 @@ export default function FeaturedWorks() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#030d1e]/90 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* Card Body */}
               <div className="flex flex-col flex-grow justify-between">
                 <div className="mb-6">
                   <span className="text-[10px] font-bold text-sky-400 uppercase tracking-wider block mb-1.5">
@@ -147,7 +140,6 @@ export default function FeaturedWorks() {
                   </p>
                 </div>
 
-                {/* Call To Action (CTA) */}
                 <div className="pt-4 border-t border-sky-900/40 flex items-center justify-between">
                   <a
                     href={work.link}

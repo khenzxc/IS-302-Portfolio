@@ -7,8 +7,6 @@ export default function Process() {
       className="relative z-10 bg-[#030e21] py-20 text-white border-t border-slate-800/80"
     >
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
-        {/* Header - Centered */}
         <div className="max-w-2xl mb-12 text-center mx-auto">
           <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block mb-1.5">
             Coursework
@@ -21,7 +19,6 @@ export default function Process() {
           </p>
         </div>
 
-        {/* Milestone Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {projectMilestones.map((item, idx) => (
             <div 

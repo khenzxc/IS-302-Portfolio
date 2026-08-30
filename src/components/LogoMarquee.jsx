@@ -7,7 +7,6 @@ export default function LogoMarquee() {
 
   return (
     <div className="w-full bg-[#030e21] border-y border-slate-800/80 py-6 sm:py-8 relative z-10">
-      {/* Horizontal Single Line Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-center gap-6 sm:gap-20 overflow-x-auto no-scrollbar flex-nowrap">
         {logos.map((logo, index) => (
           <div

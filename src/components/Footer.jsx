@@ -38,8 +38,6 @@ export default function Footer() {
         viewport={{ once: true, margin: "-50px" }}
       >
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-          
-          {/* Left Side: Brand Details */}
           <motion.div variants={itemVariants} className="md:col-span-6 flex flex-col gap-2">
             <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">
               Course Portfolio
@@ -52,7 +50,6 @@ export default function Footer() {
             </p>
           </motion.div>
 
-          {/* Middle: Navigation Links */}
           <motion.div variants={itemVariants} className="md:col-span-3 flex flex-col gap-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-widest">
               Resources
@@ -73,14 +70,12 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Right: Social Links */}
           <motion.div variants={itemVariants} className="md:col-span-3 flex flex-col gap-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-widest">
               Social
             </h4>
             
             <div className="flex items-center gap-2">
-              {/* Facebook */}
               <a
                 href="https://facebook.com"
                 target="_blank"
@@ -93,7 +88,6 @@ export default function Footer() {
                 </svg>
               </a>
 
-              {/* LinkedIn */}
               <a
                 href="https://linkedin.com"
                 target="_blank"
@@ -106,7 +100,6 @@ export default function Footer() {
                 </svg>
               </a>
 
-              {/* GitHub */}
               <a
                 href="https://github.com"
                 target="_blank"
@@ -119,7 +112,6 @@ export default function Footer() {
                 </svg>
               </a>
 
-              {/* Email */}
               <a
                 href="mailto:contact@example.com"
                 className="w-10 h-10 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-blue-400 transition-all hover:scale-105"
@@ -134,7 +126,6 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Copyright */}
         <motion.div 
           variants={itemVariants}
           className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs font-semibold text-slate-400 gap-3"

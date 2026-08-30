@@ -1,20 +1,18 @@
 import { motion } from "framer-motion";
 
-// Natural & Fluid Spring Physics Config (Walang matigas na transition)
 const fluidSpring = {
   type: "spring",
-  stiffness: 70,   // Mas mababa = mas malambot ang galaw
-  damping: 14,     // Tamang timpla ng bounce para hindi matigas
-  mass: 0.8,       // Magaan at sakto ang sway
+  stiffness: 70,
+  damping: 14,
+  mass: 0.8,
 };
 
-// Container setup para isa-isang pumasok (Staggered)
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15, // Isa-isang susunod ang bawat card/item
+      staggerChildren: 0.15,
       delayChildren: 0.05,
     },
   },
@@ -29,7 +27,6 @@ const itemVariants = {
   },
 };
 
-// Smooth & Soft Slide galing sa Kanan
 const cardVariants = {
   hidden: { opacity: 0, x: 30 },
   visible: {
@@ -46,11 +43,7 @@ export default function About() {
       className="relative z-10 bg-white py-20 text-gray-900 border-t border-slate-200 shadow-[0_-25px_50px_-12px_rgba(0,0,0,0.15)] rounded-t-[2.5rem]"
     >
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
-        {/* Main Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-          
-          {/* LEFT SIDE: Course Meta & Description */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
@@ -58,8 +51,6 @@ export default function About() {
             viewport={{ once: true, margin: "-80px" }}
             className="flex flex-col gap-5"
           >
-            
-            {/* Section Header */}
             <motion.div variants={itemVariants}>
               <span className="text-xs font-bold text-blue-600 uppercase tracking-widest block mb-1.5">
                 Overview
@@ -72,7 +63,6 @@ export default function About() {
               </p>
             </motion.div>
 
-            {/* Compact Course Meta Info Chips */}
             <motion.div variants={itemVariants} className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 text-[11px] font-medium text-slate-700">
               <span className="px-3 py-1.5 bg-slate-100 border border-slate-200/80 rounded-xl sm:rounded-full truncate text-center sm:text-left transition-transform hover:scale-105">
                 <strong className="text-slate-900">College:</strong> CICT
@@ -88,7 +78,6 @@ export default function About() {
               </span>
             </motion.div>
 
-            {/* Course Description */}
             <motion.div variants={itemVariants} className="p-0 mt-1">
               <h3 className="text-base sm:text-lg font-bold text-black mb-2">
                 Course Description
@@ -103,7 +92,6 @@ export default function About() {
 
           </motion.div>
 
-          {/* RIGHT SIDE: Key Highlights (01, 02, 03 - Malambot at Isa-isang Kanan) */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
@@ -111,7 +99,6 @@ export default function About() {
             viewport={{ once: true, margin: "-80px" }}
             className="flex flex-col gap-4"
           >
-            
             <motion.div 
               variants={cardVariants}
               whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 15 } }}

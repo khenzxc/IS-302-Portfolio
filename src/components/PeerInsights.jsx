@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const TOP_ROW_INSIGHTS = [
   {
@@ -58,23 +58,69 @@ const BOTTOM_ROW_INSIGHTS = [
 ];
 
 export default function PeerInsights() {
+  const [isPausedRow1, setIsPausedRow1] = useState(false);
+  const [isPausedRow2, setIsPausedRow2] = useState(false);
+
   const topRowRepeated = [...TOP_ROW_INSIGHTS, ...TOP_ROW_INSIGHTS, ...TOP_ROW_INSIGHTS];
   const bottomRowRepeated = [...BOTTOM_ROW_INSIGHTS, ...BOTTOM_ROW_INSIGHTS, ...BOTTOM_ROW_INSIGHTS];
+
+  useEffect(() => {
+    const resumeAll = () => {
+      setIsPausedRow1(false);
+      setIsPausedRow2(false);
+    };
+
+    window.addEventListener("scroll", resumeAll, { passive: true });
+    window.addEventListener("touchmove", resumeAll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", resumeAll);
+      window.removeEventListener("touchmove", resumeAll);
+    };
+  }, []);
+
+  const handleMobileTouch = (row, e) => {
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      e.stopPropagation();
+      
+      if (row === 1) {
+        setIsPausedRow1((prev) => !prev);
+      } else {
+        setIsPausedRow2((prev) => !prev);
+      }
+    }
+  };
 
   return (
     <section
       id="insights"
-      className="relative z-10 bg-white py-20 text-slate-900 overflow-hidden"
+      className="relative z-10 bg-white py-20 text-slate-900 overflow-hidden font-['Plus_Jakarta_Sans',sans-serif] select-none"
     >
-      {/* Ambient Lighting Glow (Soft Light Blue Center) */}
+      <style jsx global>{`
+        @keyframes marqueeRight {
+          0% { transform: translate3d(-33.33%, 0, 0); }
+          100% { transform: translate3d(0%, 0, 0); }
+        }
+        @keyframes marqueeLeft {
+          0% { transform: translate3d(0%, 0, 0); }
+          100% { transform: translate3d(-33.33%, 0, 0); }
+        }
+        .animate-marquee-right {
+          animation: marqueeRight 35s linear infinite;
+          will-change: transform;
+        }
+        .animate-marquee-left {
+          animation: marqueeLeft 35s linear infinite;
+          will-change: transform;
+        }
+      `}</style>
+
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-blue-100/60 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* Side Fade Gradient Overlays Matching White BG */}
-      <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
+      <div className="hidden md:block absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
+      <div className="hidden md:block absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 mb-12">
-        {/* Header */}
         <div className="max-w-2xl text-center mx-auto">
           <span className="text-xs font-bold text-blue-600 uppercase tracking-widest block mb-1.5">
             Key Learnings & Takeaways
@@ -88,71 +134,62 @@ export default function PeerInsights() {
         </div>
       </div>
 
-      {/* Marquee Rows Container */}
-      <div className="flex flex-col gap-6 overflow-hidden select-none">
-        
-        {/* Row 1: Moving Right */}
-        <motion.div
-          className="flex gap-6 w-max"
-          animate={{ x: ["-33.33%", "0%"] }}
-          transition={{
-            ease: "linear",
-            duration: 35,
-            repeat: Infinity,
-          }}
-        >
-          {topRowRepeated.map((item, index) => (
-            <div
-              key={`top-${index}`}
-              className="w-[320px] sm:w-[380px] p-6 rounded-2xl bg-slate-50/90 border border-slate-200/80 backdrop-blur-md shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 flex-shrink-0 flex flex-col justify-between"
-            >
-              <div>
-                <QuoteIcon />
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-6">
-                  "{item.quote}"
-                </p>
+      <div className="flex flex-col gap-6 overflow-hidden">
+        <div className="flex overflow-hidden">
+          <div
+            className="flex gap-6 w-max animate-marquee-right"
+            style={{ animationPlayState: isPausedRow1 ? "paused" : "running" }}
+            onClick={(e) => handleMobileTouch(1, e)}
+          >
+            {topRowRepeated.map((item, index) => (
+              <div
+                key={`top-${index}`}
+                className="w-[320px] sm:w-[380px] p-6 rounded-2xl bg-slate-50/90 border border-slate-200/80 backdrop-blur-md shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 flex-shrink-0 flex flex-col justify-between"
+              >
+                <div>
+                  <QuoteIcon />
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-6 pointer-events-none">
+                    "{item.quote}"
+                  </p>
+                </div>
+                <ProfileFooter item={item} />
               </div>
-              <ProfileFooter item={item} />
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
 
-        {/* Row 2: Moving Left */}
-        <motion.div
-          className="flex gap-6 w-max"
-          animate={{ x: ["0%", "-33.33%"] }}
-          transition={{
-            ease: "linear",
-            duration: 35,
-            repeat: Infinity,
-          }}
-        >
-          {bottomRowRepeated.map((item, index) => (
-            <div
-              key={`bottom-${index}`}
-              className="w-[320px] sm:w-[380px] p-6 rounded-2xl bg-slate-50/90 border border-slate-200/80 backdrop-blur-md shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 flex-shrink-0 flex flex-col justify-between"
-            >
-              <div>
-                <QuoteIcon />
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-6">
-                  "{item.quote}"
-                </p>
+        <div className="flex overflow-hidden">
+          <div
+            className="flex gap-6 w-max animate-marquee-left"
+            style={{ animationPlayState: isPausedRow2 ? "paused" : "running" }}
+            onClick={(e) => handleMobileTouch(2, e)}
+          >
+            {bottomRowRepeated.map((item, index) => (
+              <div
+                key={`bottom-${index}`}
+                className="w-[320px] sm:w-[380px] p-6 rounded-2xl bg-slate-50/90 border border-slate-200/80 backdrop-blur-md shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 flex-shrink-0 flex flex-col justify-between"
+              >
+                <div>
+                  <QuoteIcon />
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-6 pointer-events-none">
+                    "{item.quote}"
+                  </p>
+                </div>
+                <ProfileFooter item={item} />
               </div>
-              <ProfileFooter item={item} />
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
 
       </div>
     </section>
   );
 }
 
-// Sub-component: Quote Symbol (Deep Blue Accent)
 function QuoteIcon() {
   return (
     <svg
-      className="w-7 h-7 text-blue-600 mb-4 fill-current"
+      className="w-7 h-7 text-blue-600 mb-4 fill-current pointer-events-none"
       viewBox="0 0 24 24"
     >
       <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
@@ -160,10 +197,9 @@ function QuoteIcon() {
   );
 }
 
-// Sub-component: Profile Avatar & Name
 function ProfileFooter({ item }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 pointer-events-none">
       <img
         src={item.avatar}
         alt={item.name}

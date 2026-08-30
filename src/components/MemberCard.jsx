@@ -11,7 +11,6 @@ export default function MemberCard({ member }) {
         <p className="text-sm font-medium text-blue-600 mb-3">{member.role}</p>
         <p className="text-slate-600 text-sm mb-4 flex-grow">{member.bio}</p>
         
-        {/* Skills Tags */}
         <div className="flex flex-wrap gap-2 mb-6">
           {member.skills.map((skill) => (
             <span
@@ -23,7 +22,6 @@ export default function MemberCard({ member }) {
           ))}
         </div>
 
-        {/* Social Links */}
         <div className="pt-4 border-t border-slate-100 flex gap-4 text-xs font-semibold text-slate-400">
           <a href={member.socials.github} className="hover:text-blue-600 transition-colors">GitHub</a>
           <a href={member.socials.linkedin} className="hover:text-blue-600 transition-colors">LinkedIn</a>

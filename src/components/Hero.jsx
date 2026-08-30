@@ -2,7 +2,6 @@ import { FileText, Database, Settings, GitBranch, Network, Workflow, ShieldCheck
 import { motion } from "framer-motion";
 import { useScrollEffects } from "../hooks/useScrollEffects";
 
-// Animation Variants
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -48,9 +47,6 @@ export default function Hero() {
             style={heroStyle}
             className="sticky top-16 z-0 overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 bg-gradient-to-b from-blue-50/50 via-white to-blue-50/30 text-gray-900 transition-transform duration-75 ease-out will-change-transform relative"
         >
-            {/* ================= VISIBLE AMBIENT BLUE GLOWS ================= */}
-            
-            {/* 1. Top/Center Primary Glow */}
             <motion.div 
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -58,7 +54,6 @@ export default function Hero() {
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[650px] h-[85vw] max-h-[650px] bg-blue-200/50 sm:bg-blue-100/60 rounded-full blur-3xl pointer-events-none z-0" 
             />
 
-            {/* 2. Bottom Secondary Glow */}
             <motion.div 
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -66,12 +61,8 @@ export default function Hero() {
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/3 w-[90vw] max-w-[550px] h-[40vw] max-h-[300px] bg-blue-200/40 sm:bg-blue-100/50 rounded-full blur-3xl pointer-events-none z-0" 
             />
 
-            {/* Subtle Blue Grid Lines Background */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#2563eb15_1px,transparent_1px),linear-gradient(to_bottom,#2563eb15_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
-            {/* ================= FLOATING ICONS ================= */}
-
-            {/* 1. Top Left Corner */}
             <motion.div 
                 variants={floatingIconVariants}
                 initial="hidden"
@@ -83,7 +74,6 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            {/* 2. Middle Left Side */}
             <motion.div 
                 variants={floatingIconVariants}
                 initial="hidden"
@@ -95,7 +85,6 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            {/* 3. Bottom Left Corner */}
             <motion.div 
                 variants={floatingIconVariants}
                 initial="hidden"
@@ -107,7 +96,6 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            {/* 4. Top Right Corner */}
             <motion.div 
                 variants={floatingIconVariants}
                 initial="hidden"
@@ -119,7 +107,6 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            {/* 5. Middle Right Side */}
             <motion.div 
                 variants={floatingIconVariants}
                 initial="hidden"
@@ -131,7 +118,6 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            {/* 6. Bottom Right Corner */}
             <motion.div 
                 variants={floatingIconVariants}
                 initial="hidden"
@@ -143,7 +129,6 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            {/* 7. Bottom Center Icon */}
             <motion.div 
                 variants={floatingIconVariants}
                 initial="hidden"
@@ -155,25 +140,20 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            {/* ================= HERO CONTENT ================= */}
-
             <motion.div 
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
                 className="max-w-4xl mx-auto px-6 text-center relative z-10 my-auto"
             >
-                {/* Badge / Category */}
                 <motion.span variants={itemVariants} className="text-xs font-bold tracking-widest text-[#030e21] uppercase mb-4 block">
                     IS-302 • Business Process Management
                 </motion.span>
 
-                {/* Main Heading */}
                 <motion.h1 variants={itemVariants} className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-black leading-[1.25] mb-6">
                     Our{" "}
                     <span className="relative inline-block text-blue-600">
                         Learning
-                        {/* Animated Curved Underline SVG */}
                         <motion.svg
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{ pathLength: 1, opacity: 1 }}
@@ -194,12 +174,10 @@ export default function Hero() {
                     <span className="ml-2">Journey in BPM</span>
                 </motion.h1>
 
-                {/* Description Paragraph */}
                 <motion.p variants={itemVariants} className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto font-normal leading-relaxed mb-8">
                     A collection of our diagrams, group activities, case studies, and project files for Business Process Management.
                 </motion.p>
 
-                {/* CTA Buttons Container */}
                 <motion.div variants={itemVariants} className="inline-flex items-center p-1.5 bg-gray-50/90 backdrop-blur-sm rounded-full border border-gray-200 gap-2">
                     <a
                         href="#process"
