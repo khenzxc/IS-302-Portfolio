@@ -1,8 +1,8 @@
 export default function LogoMarquee() {
   const logos = [
     { name: "CICT", src: "/cict-logo.webp" },
-    { name: "BSIS", src: "/bsis-logo.webp" },
     { name: "BulSU", src: "/bulsu-logo.webp" },
+    { name: "BSIS", src: "/bsis-logo.webp" },
   ];
 
   return (
