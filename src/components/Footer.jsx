@@ -98,7 +98,7 @@ export default function Footer() {
               Course Portfolio
             </span>
 
-            <div className="flex items-center gap-4 my-1">
+            <div className="flex items-center gap-1 my-1">
               <img
                 src="insight-logo.webp"
                 alt="InSight Logo"
