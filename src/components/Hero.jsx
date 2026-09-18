@@ -147,7 +147,7 @@ export default function Hero() {
                 className="max-w-4xl mx-auto px-6 text-center relative z-10 my-auto"
             >
                 <motion.span variants={itemVariants} className="text-xs font-bold tracking-widest text-[#030e21] uppercase mb-4 block">
-                    IS-302 • Business Process Management
+                    IS-302 | Business Process Management
                 </motion.span>
 
                 <motion.h1 variants={itemVariants} className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-black leading-[1.25] mb-6">
