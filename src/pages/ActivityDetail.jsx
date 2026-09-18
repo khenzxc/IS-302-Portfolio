@@ -14,7 +14,7 @@ const activities = {
 		steps: ["Order placement and payment confirmation", "Seller preparation and warehouse sorting", "Courier delivery and customer feedback"],
 		outcome: "A clear process scope for faster, more accurate order fulfillment and improved customer satisfaction.",
 		files: {
-			document: "/GabrielKhenVonoeBSIS3AG2_IS302_Activity1.pdf",
+			document: "https://drive.google.com/file/d/1SmW1ToTrYM7ZmPruMNa-1n2n8EYfcNq7/preview?rm=minimal",
 			canva: null,
 			video: null,
 		},
@@ -30,7 +30,7 @@ const activities = {
 		steps: ["Mapped management processes", "Grouped core operations", "Added support processes"],
 		outcome: "A one-page architecture diagram that shows how Shopee's processes work together.",
 		files: {
-			document: "/GabrielKhenVonoeBSIS3AG2_IS302_Activity2.pdf",
+			document: "https://drive.google.com/file/d/1LMMJrTauygvvVOM3iExno1-xP4Ao4gH0/preview?rm=minimal",
 			canva: null,
 			video: null,
 		},
