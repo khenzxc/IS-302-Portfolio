@@ -35,10 +35,10 @@ const activities = {
 			video: null,
 		},
 	},
-	"interactive-prototype": {
+	"Activity-2-Part-2": {
 		number: "03",
 		label: "Build",
-		title: "Interactive Prototype",
+		title: "Scenario-driven BPM Simulation",
 		description: "Turned the recommended workflow into a responsive web prototype that makes the automated flow easy to explore and discuss.",
 		image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop",
 		focus: "Making the recommended workflow tangible and easy to review.",
@@ -46,10 +46,34 @@ const activities = {
 		steps: ["Planned the user flow", "Built the interface", "Reviewed the prototype as a team"],
 		outcome: "A clickable presentation of the proposed solution.",
 		files: {
-			document: null,
-			canva: null,
-			video: null,
+			document: "https://drive.google.com/file/d/1Ibwff0rqXFl6BU_JTZRc4Ju_M0DG-LWO/preview?rm=minimal",
+			canva: "https://drive.google.com/file/d/1jr7aaI9yg2NWQoIYR1FOb8UFsPVIsvPO/preview?rm=minimal",
+			video: "https://drive.google.com/file/d/1X55DqnTNaOTs1e8UiPrnmPFIWVG9BYI1/preview",
 		},
+	},
+	"Activity-4": {
+		number: "04",
+		label: "Evaluate",
+		title: "Process Performance Review",
+		description: "Reviewed the proposed workflow using process measures to identify delays, risks, and opportunities for improvement.",
+		image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1400&auto=format&fit=crop",
+		focus: "Understanding whether the improved process is faster, clearer, and easier to manage.",
+		whatWeDid: "We assessed the proposed workflow against practical performance criteria. The review focused on handoff delays, repeated work, visibility of order status, and the points where automation could reduce manual effort.",
+		steps: ["Defined performance criteria", "Reviewed process risks", "Identified improvement opportunities"],
+		outcome: "A focused set of observations to guide the next version of the process and prototype.",
+		files: { document: null, canva: null, video: null },
+	},
+	"Activity-5": {
+		number: "05",
+		label: "Present",
+		title: "BPM Solution Handoff",
+		description: "Brought the findings, process model, and prototype together into one clear presentation for review and handoff.",
+		image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1400&auto=format&fit=crop",
+		focus: "Making the final recommendation easy for others to understand, review, and continue developing.",
+		whatWeDid: "We organized the project findings into a concise handoff. The presentation connects the original process problem, the architecture diagram, the recommended workflow, and the prototype so the solution can be reviewed as one complete story.",
+		steps: ["Organized the project findings", "Presented the recommended solution", "Prepared the final handoff"],
+		outcome: "A complete BPM project presentation ready for review and future implementation.",
+		files: { document: null, canva: null, video: null },
 	},
 };
 
@@ -141,11 +165,12 @@ export default function ActivityDetail() {
 							{activity.files.video && <div>
 								<div className="mb-3 flex items-baseline justify-between gap-4">
 									<h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800">Recorded presentation</h3>
-									<span className="text-xs text-slate-400">recording.mp4</span>
+									<span className="text-xs text-slate-400">Drive video</span>
 								</div>
-								<video controls preload="metadata" className="max-h-[520px] w-full bg-slate-950" src={activity.files.video}>
-									Your browser does not support video playback.
-								</video>
+								<div className="relative aspect-[4/3] min-h-[240px] w-full overflow-hidden rounded-lg border border-slate-300 bg-slate-950 shadow-sm sm:aspect-auto sm:h-[520px]">
+									<iframe title={`${activity.title} recorded presentation`} src={activity.files.video} className="block h-full w-full touch-auto" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen webkitallowfullscreen="true" />
+									<a href={activity.files.video} target="_blank" rel="noreferrer" className="absolute bottom-3 right-3 rounded-md bg-slate-950/80 px-3 py-2 text-xs font-bold text-white underline-offset-2 hover:underline sm:hidden">Open video</a>
+								</div>
 							</div>}
 
 							{!activity.files.document && !activity.files.canva && !activity.files.video && (

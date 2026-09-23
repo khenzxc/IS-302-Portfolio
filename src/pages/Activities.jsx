@@ -23,12 +23,30 @@ const activityDetails = [
 	},
 	{
 		number: "03",
-		slug: "interactive-prototype",
+		slug: "Activity-2-Part-2",
 		label: "Build",
-		title: "Interactive Prototype",
+		title: "Scenario-driven BPM Simulation",
 		description: "Turned the recommended workflow into a responsive web prototype that makes the automated flow easy to explore and discuss.",
 		image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=900&auto=format&fit=crop",
 		tags: ["React", "Prototype"],
+	},
+	{
+		number: "04",
+		slug: "Activity-4",
+		label: "Evaluate",
+		title: "Process Performance Review",
+		description: "Reviewed the proposed workflow using process measures to identify delays, risks, and opportunities for improvement.",
+		image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=900&auto=format&fit=crop",
+		tags: ["Analysis", "Metrics"],
+	},
+	{
+		number: "05",
+		slug: "Activity-5",
+		label: "Present",
+		title: "BPM Solution Handoff",
+		description: "Brought the findings, process model, and prototype together into one clear presentation for review and handoff.",
+		image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=900&auto=format&fit=crop",
+		tags: ["Presentation", "Handoff"],
 	},
 ];
 
@@ -67,7 +85,7 @@ export default function Activities() {
 
 					<div className="grid gap-5 lg:grid-cols-3">
 						{activityDetails.map(({ number, slug, label, title, description, image, tags }, index) => (
-							<Link to={`/activities/${slug}`} key={title} className={`flex min-h-[360px] flex-col justify-between overflow-hidden rounded-2xl border p-6 shadow-sm ${index === 1 ? "border-blue-200 bg-[#eef5ff]" : "border-slate-200 bg-slate-50/70"}`}>
+							<Link to={`/activities/${slug}`} key={title} className={`flex min-h-[360px] flex-col justify-between overflow-hidden rounded-2xl border border-blue-200 p-6 shadow-sm transition-shadow hover:border-blue-400 hover:shadow-md ${index === 1 ? "bg-[#eef5ff]" : "bg-slate-50/70"}`}>
 								<div className="relative -mx-6 -mt-6 mb-6 h-44 overflow-hidden">
 									<img src={image} alt={`${title} activity`} className="h-full w-full object-cover" />
 									<div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent" />

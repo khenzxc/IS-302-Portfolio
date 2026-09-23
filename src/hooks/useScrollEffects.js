@@ -18,6 +18,8 @@ export function useScrollEffects(maxBlur = 12, fadeDistance = 500) {
     const updateViewport = () => setIsMobile(window.innerWidth <= 768);
 
     const handleScroll = () => {
+      if (window.innerWidth <= 768) return;
+
       if (prefersReducedMotion) {
         setScrollY(0);
         return;
