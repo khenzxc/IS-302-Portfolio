@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const quickLinks = [
-  { href: "/", label: "Home", onClick: true },
-  { href: "#about", label: "About Project" },
-  { href: "#works", label: "Featured Works" },
-  { href: "#team", label: "Team Members" },
-  { href: "#insights", label: "Peer Insights" },
+  { href: "/", label: "Home", section: null },
+  { href: "/#about", label: "About Project", section: "about" },
+  { href: "/#works", label: "Featured Works", section: "works" },
+  { href: "/#team", label: "Team Members", section: "team" },
+  { href: "/#insights", label: "Peer Insights", section: "insights" },
 ];
 
 const socialLinks = [
@@ -77,9 +78,30 @@ const itemVariants = {
 };
 
 export default function Footer() {
-  const scrollToTop = (e) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleQuickLink = (e, section) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    if (!section) {
+      if (pathname === "/") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/");
+      }
+      return;
+    }
+
+    const scrollToSection = () => document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    if (pathname === "/") {
+      scrollToSection();
+      return;
+    }
+
+    navigate(`/#${section}`);
+    window.setTimeout(scrollToSection, 50);
   };
 
   return (
@@ -121,11 +143,11 @@ export default function Footer() {
               Quick Links
             </h4>
             <div className="flex flex-col gap-3 text-xs sm:text-sm font-semibold text-slate-400">
-              {quickLinks.map(({ href, label, onClick }) => (
+              {quickLinks.map(({ href, label, section }) => (
                 <a
                   key={label}
                   href={href}
-                  onClick={onClick ? scrollToTop : undefined}
+                  onClick={(event) => handleQuickLink(event, section)}
                   className="hover:text-blue-400 transition-colors w-fit flex items-center gap-1.5 cursor-pointer"
                 >
                   {label}

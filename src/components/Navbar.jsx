@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { Menu, X, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { activityList } from "../data/activities.js";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
     setIsOpen(false);
+    setIsActivitiesOpen(false);
   }, [pathname, hash]);
 
   const navItems = [
@@ -35,7 +38,26 @@ export default function Navbar() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-slate-600">
-            {navItems.map((item) => (
+            {navItems.map((item) => item.label === "Activities" ? (
+              <div key={item.label} className="relative">
+                <NavLink to="/activities" className={({ isActive }) => `relative py-1 text-xs font-bold uppercase tracking-wider transition-colors after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-blue-600 after:transition-all ${isActive ? "text-blue-600 after:w-full" : "text-slate-600 after:w-0 hover:text-blue-600 hover:after:w-full"}`}>Activities</NavLink>
+                <div className="absolute left-full top-0.5 ml-0.5 group">
+                  <button type="button" onClick={() => setIsActivitiesOpen((open) => !open)} className="rounded p-1 text-slate-600 transition-colors hover:bg-blue-50 hover:text-blue-600" aria-label="Open activity shortcuts" aria-expanded={isActivitiesOpen}>
+                    <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isActivitiesOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <div className={`${isActivitiesOpen ? "block" : "hidden group-hover:block"} absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-3`}>
+                  <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
+                    {activityList.map((activity) => (
+                      <Link key={activity.slug} to={`/activities/${activity.slug}`} className="flex items-center gap-3 rounded-lg py-2.5 pl-1 pr-3 text-left text-xs font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600">
+                      <span className="w-8 shrink-0 text-right text-blue-600">{activity.number}</span>
+                        <span>{activity.title}</span>
+                      </Link>
+                    ))}
+                  </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
               <NavLink
                 key={item.label}
                 to={item.to}
@@ -67,7 +89,20 @@ export default function Navbar() {
         {isOpen && (
           <div className="absolute top-full left-0 right-0 w-full bg-white border-b border-slate-200/80 shadow-2xl p-5 md:hidden transition-all duration-200 ease-out z-50">
             <nav className="flex flex-col gap-1.5 mb-3">
-              {navItems.map((item) => (
+              {navItems.map((item) => item.label === "Activities" ? (
+                <div key={item.label}>
+                  <div className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-blue-50/80 hover:text-blue-600">
+                    <Link to="/activities" onClick={() => setIsOpen(false)} className="flex-1">Activities</Link>
+                    <button type="button" onClick={() => setIsActivitiesOpen((open) => !open)} aria-label="Open activity shortcuts" aria-expanded={isActivitiesOpen} className="rounded p-1">
+                      <ChevronDown className={`h-4 w-4 transition-transform ${isActivitiesOpen ? "rotate-180" : ""}`} />
+                    </button>
+                    <ChevronRight className="h-4 w-4 text-slate-300" />
+                  </div>
+                  {isActivitiesOpen && <div className="mt-1 space-y-1 border-l-2 border-blue-100 pl-3">
+                    {activityList.map((activity) => <Link key={activity.slug} to={`/activities/${activity.slug}`} onClick={() => setIsOpen(false)} className="flex gap-2 rounded-lg py-2 pl-1 pr-3 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600"><span className="w-8 shrink-0 text-right text-blue-600">{activity.number}</span><span>{activity.title}</span></Link>)}
+                  </div>}
+                </div>
+              ) : (
                 <NavLink
                   key={item.label}
                   to={item.to}

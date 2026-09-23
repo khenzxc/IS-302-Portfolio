@@ -1,54 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { projectMilestones } from "../data/team.js";
-
-const activityDetails = [
-	{
-		number: "01",
-		slug: "Activity-1",
-		label: "Discover",
-		title: "BPM Unboxed: Inside the Process",
-		description: "Documented the Shopee order fulfillment process, from customer order placement through delivery and order completion.",
-		image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=900&auto=format&fit=crop",
-		tags: ["Shopee", "Order Fulfillment"],
-	},
-	{
-		number: "02",
-		slug: "Activity-2",
-		label: "Improve",
-		title: "Shopee Process Architecture Diagram",
-		description: "Mapped Shopee's management, core, and support processes into one architecture diagram.",
-		image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=900&auto=format&fit=crop",
-		tags: ["Process Architecture", "Shopee"],
-	},
-	{
-		number: "03",
-		slug: "Activity-2-Part-2",
-		label: "Build",
-		title: "Scenario-driven BPM Simulation",
-		description: "Turned the recommended workflow into a responsive web prototype that makes the automated flow easy to explore and discuss.",
-		image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=900&auto=format&fit=crop",
-		tags: ["React", "Prototype"],
-	},
-	{
-		number: "04",
-		slug: "Activity-4",
-		label: "Evaluate",
-		title: "Process Performance Review",
-		description: "Reviewed the proposed workflow using process measures to identify delays, risks, and opportunities for improvement.",
-		image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=900&auto=format&fit=crop",
-		tags: ["Analysis", "Metrics"],
-	},
-	{
-		number: "05",
-		slug: "Activity-5",
-		label: "Present",
-		title: "BPM Solution Handoff",
-		description: "Brought the findings, process model, and prototype together into one clear presentation for review and handoff.",
-		image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=900&auto=format&fit=crop",
-		tags: ["Presentation", "Handoff"],
-	},
-];
+import { activityList } from "../data/activities.js";
 
 export default function Activities() {
 	return (
@@ -84,7 +37,7 @@ export default function Activities() {
 					</div>
 
 					<div className="grid gap-5 lg:grid-cols-3">
-						{activityDetails.map(({ number, slug, label, title, description, image, tags }, index) => (
+						{activityList.map(({ number, displayName, slug, label, title, description, image, tags }, index) => (
 							<Link to={`/activities/${slug}`} key={title} className={`flex min-h-[360px] flex-col justify-between overflow-hidden rounded-2xl border border-blue-200 p-6 shadow-sm transition-shadow hover:border-blue-400 hover:shadow-md ${index === 1 ? "bg-[#eef5ff]" : "bg-slate-50/70"}`}>
 								<div className="relative -mx-6 -mt-6 mb-6 h-44 overflow-hidden">
 									<img src={image} alt={`${title} activity`} className="h-full w-full object-cover" />
@@ -92,7 +45,7 @@ export default function Activities() {
 									<span className="absolute bottom-4 left-4 text-4xl font-black tracking-tight text-white/90">{number}</span>
 								</div>
 								<div>
-									<div className="mb-5"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Activity {number}</span></div>
+									<div className="mb-5"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">{displayName}</span></div>
 									<span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">{label}</span>
 									<h3 className="mt-2 text-xl font-extrabold tracking-tight text-slate-950">{title}</h3>
 									<p className="mt-3 text-sm leading-6 text-slate-600">{description}</p>
