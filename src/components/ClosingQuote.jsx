@@ -1,12 +1,6 @@
-import { motion } from "framer-motion";
-
 export default function ClosingQuote() {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <section
       className="relative z-10 border-0 bg-white pt-4 pb-20 sm:pt-6 sm:pb-24"
     >
       <div className="mx-auto max-w-5xl px-6 text-center">
@@ -20,6 +14,6 @@ export default function ClosingQuote() {
           — Marcus Aurelius
         </p>
       </div>
-    </motion.section>
+    </section>
   );
 }
