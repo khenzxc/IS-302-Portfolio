@@ -59,7 +59,7 @@ export default function About() {
                 About the Course
               </h2>
               <p className="text-gray-600 text-sm font-semibold">
-                IS 302 • Business Process Management (BPM)
+                IS 302 | Business Process Management (BPM)
               </p>
             </motion.div>
 

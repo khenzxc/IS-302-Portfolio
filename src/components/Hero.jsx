@@ -178,16 +178,16 @@ export default function Hero() {
                     A collection of our diagrams, group activities, case studies, and project files for Business Process Management.
                 </motion.p>
 
-                <motion.div variants={itemVariants} className="inline-flex items-center p-1.5 bg-gray-50/90 backdrop-blur-sm rounded-full border border-gray-200 gap-2">
+                <motion.div variants={itemVariants} className="inline-flex items-center p-1 bg-gray-50/90 backdrop-blur-sm rounded-full border border-gray-200 gap-1 sm:p-1.5 sm:gap-2">
                     <a
                         href="#process"
-                        className="px-6 py-3 rounded-full bg-blue-600 text-white font-bold text-xs sm:text-sm hover:bg-blue-700 transition-all hover:scale-105 active:scale-95 cursor-pointer block"
+                        className="px-4 py-2 rounded-full bg-blue-600 text-white font-bold text-[11px] sm:px-6 sm:py-3 sm:text-sm hover:bg-blue-700 transition-all hover:scale-105 active:scale-95 cursor-pointer block"
                     >
                         Course Deliverables
                     </a>
                     <a
                         href="#team"
-                        className="px-6 py-3 rounded-full text-xs sm:text-sm font-bold text-gray-700 hover:text-black transition-colors hover:scale-105 active:scale-95 cursor-pointer block"
+                        className="px-4 py-2 rounded-full text-[11px] sm:px-6 sm:py-3 sm:text-sm font-bold text-gray-700 hover:text-black transition-colors hover:scale-105 active:scale-95 cursor-pointer block"
                     >
                         Group Members
                     </a>

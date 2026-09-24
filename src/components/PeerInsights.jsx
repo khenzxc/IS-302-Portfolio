@@ -101,7 +101,7 @@ export default function PeerInsights() {
   return (
     <section
       id="insights"
-      className="relative z-10 bg-white py-20 text-slate-900 overflow-hidden font-['Plus_Jakarta_Sans',sans-serif] select-none"
+      className="relative z-10 bg-white pt-0 pb-20 text-slate-900 overflow-hidden font-['Plus_Jakarta_Sans',sans-serif] select-none"
     >
       <style jsx global>{`
         @keyframes marqueeRight {

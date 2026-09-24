@@ -55,7 +55,7 @@ export const activities = {
 	"Activity-3": {
 		number: "03",
 		displayName: "Activity 3",
-		slug: "Activity-4",
+		slug: "Activity-3",
 		label: "Evaluate",
 		title: "Process Performance Review",
 		description: "Reviewed the proposed workflow using process measures to identify delays, risks, and opportunities for improvement.",
