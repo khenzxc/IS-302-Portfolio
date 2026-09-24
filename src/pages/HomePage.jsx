@@ -13,8 +13,8 @@ export default function HomePage() {
             <About />
             <FeaturedWorks />
             <Team />
-            <PeerInsights />
             <LogoMarquee />
+            <PeerInsights />
             <ClosingQuote />
         </div>
     );
