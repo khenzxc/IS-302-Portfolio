@@ -32,20 +32,14 @@ const floatingIconVariants = {
 };
 
 export default function Hero() {
-    const { opacity, blur, scale, isMobile } = useScrollEffects();
+    const { opacity } = useScrollEffects();
 
-    const heroStyle = isMobile
-        ? { opacity, transform: `scale(${scale})` }
-        : {
-            opacity,
-            filter: `blur(${blur}px)`,
-            transform: `scale(${scale})`,
-          };
+    const heroStyle = { opacity };
 
     return (
         <section
             style={heroStyle}
-            className="sticky top-16 z-0 overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 bg-gradient-to-b from-blue-50/50 via-white to-blue-50/30 text-gray-900 transition-transform duration-75 ease-out will-change-transform relative"
+            className="sticky top-16 z-0 overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 bg-gradient-to-b from-blue-50/50 via-white to-blue-50/30 text-gray-900 will-change-opacity relative"
         >
             <motion.div 
                 initial={{ opacity: 0, scale: 0.8 }}
