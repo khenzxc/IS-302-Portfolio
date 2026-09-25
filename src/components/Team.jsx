@@ -13,13 +13,13 @@ const DEFAULT_MEMBERS = [
   {
     id: 2,
     name: "Khen Vonoe Gabriel",
-    role: "Visual Creator",
+    role: "Tech Coordinator",
     image: "/khen.webp",
   },
   {
     id: 3,
     name: "Eldon Rex Santos",
-    role: "Lead Researcher",
+    role: "Process Researcher",
     image: "/eldon.webp",
   },
   {
@@ -31,7 +31,7 @@ const DEFAULT_MEMBERS = [
   {
     id: 5,
     name: "Simon Paul Bolus",
-    role: "Lead Writer",
+    role: "Documentation Creator",
     image: "/simon.webp",
   },
 ]

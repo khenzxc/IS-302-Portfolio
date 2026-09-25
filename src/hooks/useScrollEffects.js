@@ -13,7 +13,6 @@ export function useScrollEffects(fadeDistance = 500) {
 
     const handleScroll = () => {
       if (prefersReducedMotion) {
-        setScrollY(0);
         return;
       }
 
@@ -31,7 +30,6 @@ export function useScrollEffects(fadeDistance = 500) {
     };
 
     if (prefersReducedMotion) {
-      setScrollY(0);
       return () => {};
     }
 

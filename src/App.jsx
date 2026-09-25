@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Activities from "./pages/Activities.jsx";
 import ActivityDetail from "./pages/ActivityDetail.jsx";
+import AboutUs from "./pages/AboutUs.jsx";
 import Footer from "./components/Footer.jsx";
 
 function ScrollToTop() {
@@ -28,6 +29,7 @@ export default function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/activities" element={<Activities />} />
               <Route path="/activities/:activityId" element={<ActivityDetail />} />
+              <Route path="/about" element={<AboutUs />} />
               <Route path="*" element={<HomePage />} />
             </Routes>
           </main>

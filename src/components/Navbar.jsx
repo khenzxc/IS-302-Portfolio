@@ -15,6 +15,7 @@ export default function Navbar() {
 
   const navItems = [
     { to: "/", label: "Overview", end: true },
+    { to: "/about", label: "About Us" },
     { to: "/activities", label: "Activities" },
     { to: "/#works", label: "Projects" },
   ];
@@ -26,7 +27,10 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           <Link
             to="/"
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+              setIsOpen(false);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className="font-black text-lg sm:text-xl tracking-tight text-slate-900 flex items-center gap-0.5 hover:opacity-80 transition-opacity"
           >
             <img
