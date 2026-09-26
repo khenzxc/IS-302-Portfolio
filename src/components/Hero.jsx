@@ -1,4 +1,3 @@
-import { FileText, Database, Settings, GitBranch, Network, Workflow, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollEffects } from "../hooks/useScrollEffects";
 
@@ -22,15 +21,6 @@ const itemVariants = {
     },
 };
 
-const floatingIconVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-        opacity: 1,
-        scale: 1,
-        transition: { duration: 0.6, ease: "easeOut" },
-    },
-};
-
 export default function Hero() {
     const { opacity } = useScrollEffects();
 
@@ -41,97 +31,63 @@ export default function Hero() {
             style={heroStyle}
             className="sticky top-16 z-0 overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 bg-gradient-to-b from-blue-50/50 via-white to-blue-50/30 text-gray-900 will-change-opacity relative"
         >
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[650px] h-[85vw] max-h-[650px] bg-blue-200/50 sm:bg-blue-100/60 rounded-full blur-3xl pointer-events-none z-0" 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[650px] h-[85vw] max-h-[650px] bg-blue-200/50 sm:bg-blue-100/60 rounded-full blur-3xl pointer-events-none z-0"
             />
 
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/3 w-[90vw] max-w-[550px] h-[40vw] max-h-[300px] bg-blue-200/40 sm:bg-blue-100/50 rounded-full blur-3xl pointer-events-none z-0" 
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/3 w-[90vw] max-w-[550px] h-[40vw] max-h-[300px] bg-blue-200/40 sm:bg-blue-100/50 rounded-full blur-3xl pointer-events-none z-0"
             />
 
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#2563eb15_1px,transparent_1px),linear-gradient(to_bottom,#2563eb15_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
-            <motion.div 
-                variants={floatingIconVariants}
-                initial="hidden"
-                animate="visible"
-                className="absolute left-8 lg:left-16 top-12 hidden md:flex items-center pointer-events-none z-10"
+            <motion.div
+                initial={{ opacity: 0, x: 24, y: 10 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+                className="absolute right-[5%] top-[18%] hidden w-52 rotate-3 rounded-2xl border border-white/80 bg-white/55 p-4 text-left shadow-[0_20px_60px_rgba(37,99,235,0.14)] backdrop-blur-xl lg:block pointer-events-none z-1"
             >
-                <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}>
-                    <Workflow className="w-10 h-10 text-blue-500/80 drop-shadow-sm" strokeWidth={1.8} />
-                </motion.div>
+                <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Process flow</span>
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
+                </div>
+                <div className="mt-4 flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-blue-500" />
+                    <span className="h-px flex-1 bg-blue-200" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-blue-300" />
+                    <span className="h-px flex-1 bg-blue-200" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-sky-300" />
+                </div>
+                <div className="mt-4 space-y-2">
+                    <div className="h-1.5 overflow-hidden rounded-full bg-blue-100"><motion.div initial={{ width: 0 }} animate={{ width: "82%" }} transition={{ duration: 1.2, delay: 1.2 }} className="h-full rounded-full bg-blue-500" /></div>
+                    <div className="h-1.5 overflow-hidden rounded-full bg-blue-100"><motion.div initial={{ width: 0 }} animate={{ width: "64%" }} transition={{ duration: 1.2, delay: 1.35 }} className="h-full rounded-full bg-sky-400" /></div>
+                    <div className="h-1.5 overflow-hidden rounded-full bg-blue-100"><motion.div initial={{ width: 0 }} animate={{ width: "46%" }} transition={{ duration: 1.2, delay: 1.5 }} className="h-full rounded-full bg-indigo-300" /></div>
+                </div>
+                <span className="mt-3 block text-[10px] font-semibold text-blue-600">Workflow aligned</span>
             </motion.div>
 
-            <motion.div 
-                variants={floatingIconVariants}
-                initial="hidden"
-                animate="visible"
-                className="absolute left-6 lg:left-20 top-1/2 -translate-y-1/2 hidden md:flex items-center pointer-events-none z-0"
+            <motion.div
+                initial={{ opacity: 0, x: -20, y: 12 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
+                className="absolute bottom-[18%] left-[6%] hidden w-44 -rotate-3 rounded-2xl border border-white/80 bg-white/50 p-4 text-left shadow-[0_20px_60px_rgba(37,99,235,0.12)] backdrop-blur-xl lg:block pointer-events-none z-1"
             >
-                <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}>
-                    <FileText className="w-12 h-12 text-blue-600 drop-shadow-md" strokeWidth={1.8} />
-                </motion.div>
-            </motion.div>
-
-            <motion.div 
-                variants={floatingIconVariants}
-                initial="hidden"
-                animate="visible"
-                className="absolute left-12 lg:left-28 bottom-12 hidden md:flex items-center pointer-events-none z-0"
-            >
-                <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 1 }}>
-                    <Database className="w-10 h-10 text-blue-500/80 drop-shadow-sm" strokeWidth={1.8} />
-                </motion.div>
-            </motion.div>
-
-            <motion.div 
-                variants={floatingIconVariants}
-                initial="hidden"
-                animate="visible"
-                className="absolute right-10 lg:right-20 top-12 hidden md:flex items-center pointer-events-none z-0"
-            >
-                <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 4.8, ease: "easeInOut", delay: 0.2 }}>
-                    <Settings className="w-11 h-11 text-blue-500/80 animate-[spin_16s_linear_infinite] drop-shadow-sm" strokeWidth={1.8} />
-                </motion.div>
-            </motion.div>
-
-            <motion.div 
-                variants={floatingIconVariants}
-                initial="hidden"
-                animate="visible"
-                className="absolute right-8 lg:right-24 top-1/2 -translate-y-1/2 hidden md:flex items-center pointer-events-none z-0"
-            >
-                <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 5.2, ease: "easeInOut", delay: 0.8 }}>
-                    <GitBranch className="w-11 h-11 text-blue-600 drop-shadow-md" strokeWidth={1.8} />
-                </motion.div>
-            </motion.div>
-
-            <motion.div 
-                variants={floatingIconVariants}
-                initial="hidden"
-                animate="visible"
-                className="absolute right-14 lg:right-32 bottom-10 hidden md:flex items-center pointer-events-none z-0"
-            >
-                <motion.div animate={{ y: [0, -7, 0] }} transition={{ repeat: Infinity, duration: 4.2, ease: "easeInOut", delay: 0.4 }}>
-                    <Network className="w-10 h-10 text-blue-600/80 drop-shadow-sm" strokeWidth={1.8} />
-                </motion.div>
-            </motion.div>
-
-            <motion.div 
-                variants={floatingIconVariants}
-                initial="hidden"
-                animate="visible"
-                className="absolute left-1/3 bottom-6 hidden lg:flex items-center pointer-events-none z-0"
-            >
-                <motion.div animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 3.8, ease: "easeInOut", delay: 1.2 }}>
-                    <ShieldCheck className="w-9 h-9 text-blue-400/70" strokeWidth={1.5} />
-                </motion.div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Project status</span>
+                <div className="mt-3 flex items-end gap-1.5">
+                    <span className="h-5 w-2 rounded-full bg-blue-200" />
+                    <span className="h-8 w-2 rounded-full bg-blue-300" />
+                    <span className="h-6 w-2 rounded-full bg-blue-400" />
+                    <span className="h-11 w-2 rounded-full bg-blue-500" />
+                    <span className="h-9 w-2 rounded-full bg-sky-400" />
+                    <span className="ml-auto text-lg font-black text-slate-900">84%</span>
+                </div>
+                <span className="mt-2 block text-[10px] text-slate-500">Learning progress</span>
             </motion.div>
 
             <motion.div 

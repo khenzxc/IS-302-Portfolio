@@ -17,11 +17,10 @@ export default function Navbar() {
     { to: "/", label: "Overview", end: true },
     { to: "/about", label: "About Us" },
     { to: "/activities", label: "Activities" },
-    { to: "/#works", label: "Projects" },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full md:pt-6 md:px-8 font-['Plus_Jakarta_Sans',-apple-system,sans-serif] pointer-events-none">
+    <header className="sticky top-0 z-50 w-full md:pt-3 md:px-8 font-['Plus_Jakarta_Sans',-apple-system,sans-serif] pointer-events-none">
       <div className="w-full md:max-w-7xl mx-auto backdrop-blur-xl bg-white/80 md:bg-white/70 border-b md:border border-white/60 shadow-sm md:shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] md:rounded-2xl px-4 sm:px-6 md:px-5 py-3 transition-all pointer-events-auto relative">
 
         <div className="flex items-center justify-between">
@@ -75,9 +74,12 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <span className="hidden sm:inline-flex px-3.5 py-1.5 rounded-full bg-slate-100/80 backdrop-blur-sm text-slate-700 text-xs font-bold uppercase tracking-wider border border-slate-200/60">
+            <Link
+              to="/projects"
+              className="hidden sm:inline-flex px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider border border-blue-500/50 shadow-sm shadow-blue-500/25 transition-all hover:from-blue-700 hover:to-indigo-700 hover:shadow-md hover:shadow-blue-500/30"
+            >
               BSIS Project
-            </span>
+            </Link>
 
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -121,9 +123,13 @@ export default function Navbar() {
             </nav>
 
             <div className="pt-2 border-t border-slate-200/50">
-              <span className="inline-block w-full text-center py-2 rounded-xl bg-slate-100/80 text-slate-700 text-xs font-bold uppercase tracking-wider border border-slate-200/60">
+              <Link
+                to="/projects"
+                onClick={() => setIsOpen(false)}
+                className="inline-block w-full text-center py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider border border-blue-500/50 shadow-sm shadow-blue-500/25 transition-all hover:from-blue-700 hover:to-indigo-700 hover:shadow-md hover:shadow-blue-500/30"
+              >
                 BSIS Project
-              </span>
+              </Link>
             </div>
           </div>
         )}

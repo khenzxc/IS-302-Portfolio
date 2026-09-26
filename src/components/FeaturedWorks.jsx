@@ -1,41 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const FEATURED_WORKS = [
-  {
-    id: "01",
-    title: "Lorem Ipsum Dolor Sit Amet",
-    category: "Consectetur Adipiscing",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-    link: "#",
-  },
-  {
-    id: "02",
-    title: "Sed Do Eiusmod Tempor",
-    category: "Magna Aliqua Ut",
-    desc: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
-    link: "#",
-  },
-  {
-    id: "03",
-    title: "Duis Aute Irure Dolor",
-    category: "Voluptate Velit Esse",
-    desc: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=1000&auto=format&fit=crop",
-    link: "#",
-  },
-  {
-    id: "04",
-    title: "Excepteur Sint Occaecat",
-    category: "Sunt In Culpa",
-    desc: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1000&auto=format&fit=crop",
-    link: "#",
-  },
-];
+import { Link } from "react-router-dom";
+import { activityList } from "../data/activities.js";
 
 const SMOOTH_EASE = [0.16, 1, 0.3, 1];
 
@@ -109,16 +76,16 @@ export default function FeaturedWorks() {
           variants={gridContainerVariants}
           className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
         >
-          {FEATURED_WORKS.map((work) => (
+          {activityList.map((activity) => (
             <motion.div 
-              key={work.id}
+              key={activity.slug}
               variants={cardVariants}
               className="flex flex-col p-5 rounded-2xl bg-[#030d1e]/90 border border-sky-500/20 backdrop-blur-md shadow-xl hover:border-sky-400/50 transition-colors duration-300"
             >
               <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl bg-slate-900 mb-5">
                 <img
-                  src={work.image}
-                  alt={work.title}
+                src={activity.image}
+                alt={activity.title}
                   draggable={false}
                   className="w-full h-full object-cover object-center select-none"
                 />
@@ -128,24 +95,24 @@ export default function FeaturedWorks() {
               <div className="flex flex-col flex-grow justify-between">
                 <div className="mb-6">
                   <span className="text-[10px] font-bold text-sky-400 uppercase tracking-wider block mb-1.5">
-                    {work.category}
+                    {activity.label}
                   </span>
                   
                   <h3 className="font-bold text-base sm:text-lg text-white mb-2">
-                    {work.title}
+                    {activity.title}
                   </h3>
 
                   <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed">
-                    {work.desc}
+                    {activity.description}
                   </p>
                 </div>
 
                 <div className="pt-4 border-t border-sky-900/40 flex items-center justify-between">
-                  <a
-                    href={work.link}
+                  <Link
+                    to={`/activities/${activity.slug}`}
                     className="group inline-flex items-center text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors"
                   >
-                    <span>View Details</span>
+                    <span>View Activity</span>
                     <svg
                       className="w-4 h-4 ml-1.5 transform transition-transform group-hover:translate-x-1"
                       fill="none"
@@ -159,7 +126,7 @@ export default function FeaturedWorks() {
                         d="M14 5l7 7m0 0l-7 7m7-7H3"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

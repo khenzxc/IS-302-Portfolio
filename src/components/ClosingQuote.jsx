@@ -6,7 +6,10 @@ export default function ClosingQuote() {
       <div className="mx-auto max-w-5xl px-6 text-center">
         <div className="mb-10 h-px w-full bg-slate-500 sm:mb-12" aria-hidden="true" />
 
-        <blockquote className="text-2xl font-medium leading-relaxed tracking-[-0.03em] text-slate-900 sm:text-4xl lg:text-5xl">
+        <blockquote
+          className="text-2xl font-normal italic leading-relaxed tracking-normal text-slate-900 sm:text-4xl lg:text-5xl"
+          style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
+        >
           “At first, dreams seem impossible, then improbable, and eventually inevitable.”
         </blockquote>
 

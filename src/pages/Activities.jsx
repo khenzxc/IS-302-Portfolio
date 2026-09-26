@@ -6,27 +6,27 @@ import { activityList } from "../data/activities.js";
 export default function Activities() {
 	return (
 		<div className="bg-white text-slate-900 font-['Plus_Jakarta_Sans',-apple-system,sans-serif]">
-			<section className="relative overflow-hidden bg-[#030e21] px-6 pb-20 pt-16 text-white sm:pt-24">
+			<section className="relative flex h-[380px] items-center overflow-hidden bg-[#030e21] px-6 py-10 text-white sm:h-[400px] sm:py-16">
 				<div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(37,99,235,0.3),transparent_30%),linear-gradient(135deg,#030e21_0%,#071d3e_58%,#062e49_100%)]" />
-				<div className="relative mx-auto max-w-7xl">
+				<div className="relative mx-auto w-full max-w-7xl">
 					<div className="max-w-3xl">
-						<span className="mb-4 block text-xs font-bold uppercase tracking-[0.24em] text-sky-300">Coursework archive</span>
-						<h1 className="max-w-2xl text-4xl font-black leading-[1.05] tracking-tight sm:text-6xl">Activities that move the process forward.</h1>
-						<p className="mt-6 max-w-2xl text-sm leading-7 text-blue-100/75 sm:text-base">
+						<span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.24em] text-sky-300">Coursework archive</span>
+						<h1 className="max-w-2xl text-3xl font-black leading-[1.05] tracking-tight sm:text-5xl">Activities that move the process forward.</h1>
+						<p className="mt-4 max-w-xl text-xs leading-6 text-blue-100/75 sm:text-sm">
 							A working record of our Business Process Management exercises, from first observations to a usable digital prototype.
 						</p>
 					</div>
 
-					<div className="mt-12 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
-						<div className="border-l border-sky-300/30 pl-4"><strong className="block text-2xl font-black text-white">03</strong><span className="text-xs text-blue-200/70">Core activities</span></div>
-						<div className="border-l border-sky-300/30 pl-4"><strong className="block text-2xl font-black text-white">02</strong><span className="text-xs text-blue-200/70">Process states</span></div>
-						<div className="border-l border-sky-300/30 pl-4"><strong className="block text-2xl font-black text-white">01</strong><span className="text-xs text-blue-200/70">Prototype</span></div>
-						<div className="border-l border-sky-300/30 pl-4"><strong className="block text-2xl font-black text-white">IS-302</strong><span className="text-xs text-blue-200/70">Course focus</span></div>
+					<div className="mt-6 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+						<div className="border-l border-sky-300/30 pl-3"><strong className="block text-xl font-black text-white">03</strong><span className="text-[11px] text-blue-200/70">Core activities</span></div>
+						<div className="border-l border-sky-300/30 pl-3"><strong className="block text-xl font-black text-white">02</strong><span className="text-[11px] text-blue-200/70">Process states</span></div>
+						<div className="border-l border-sky-300/30 pl-3"><strong className="block text-xl font-black text-white">01</strong><span className="text-[11px] text-blue-200/70">Prototype</span></div>
+						<div className="border-l border-sky-300/30 pl-3"><strong className="block text-xl font-black text-white">IS-302</strong><span className="text-[11px] text-blue-200/70">Course focus</span></div>
 					</div>
 				</div>
 			</section>
 
-			<section className="px-6 py-16 sm:py-24" id="activities-list">
+			<section className="px-6 py-10 sm:py-16" id="activities-list">
 				<div className="mx-auto max-w-7xl">
 					<div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
 						<div>

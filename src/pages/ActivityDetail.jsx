@@ -23,20 +23,20 @@ export default function ActivityDetail() {
 
 	return (
 		<div className="bg-white font-['Plus_Jakarta_Sans',-apple-system,sans-serif] text-slate-900">
-			<section className="relative overflow-hidden bg-[#030e21] px-4 pb-10 pt-6 text-white sm:px-6 sm:pb-16 sm:pt-10">
-				<div className="absolute inset-0 bg-[linear-gradient(135deg,#030e21_0%,#071d3e_58%,#062e49_100%)]" />
-				<div className="relative mx-auto max-w-7xl">
-					<Link to="/activities" className="mb-7 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-blue-200 hover:text-white sm:text-xs">
+			<section className="relative flex h-[380px] items-center overflow-hidden bg-[#030e21] px-6 py-10 text-white sm:h-[400px] sm:py-16">
+				<div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(37,99,235,0.3),transparent_30%),linear-gradient(135deg,#030e21_0%,#071d3e_58%,#062e49_100%)]" />
+				<div className="relative mx-auto w-full max-w-7xl">
+					<Link to="/activities" className="mb-5 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-blue-200 hover:text-white sm:mb-6 sm:text-xs">
 						<ArrowLeft className="h-4 w-4" />
 						Back to activities
 					</Link>
-					<div className="grid gap-6 lg:grid-cols-[1fr_0.75fr] lg:items-center lg:gap-8">
+					<div className="grid gap-5 lg:grid-cols-[1fr_0.75fr] lg:items-center lg:gap-8">
 						<div>
-							<span className="text-xs font-bold uppercase tracking-[0.2em] text-sky-300">{activity.displayName} · {activity.label}</span>
-							<h1 className="mt-3 max-w-3xl text-3xl font-black leading-[1.08] tracking-tight sm:text-5xl">{activity.title}</h1>
-							<p className="mt-4 max-w-2xl text-sm leading-6 text-blue-100/75 sm:text-base sm:leading-7">{activity.description}</p>
+							<span className="text-[11px] font-bold uppercase tracking-[0.2em] text-sky-300">{activity.displayName} · {activity.label}</span>
+							<h1 className="mt-2 max-w-3xl text-3xl font-black leading-[1.08] tracking-tight sm:text-5xl">{activity.title}</h1>
+							<p className="mt-3 max-w-xl text-xs leading-6 text-blue-100/75 sm:text-sm sm:leading-7">{activity.description}</p>
 						</div>
-						<img src={activity.image} alt="" className="h-36 w-full rounded-xl object-cover sm:h-44 lg:h-52" />
+						<img src={activity.image} alt="" className="h-32 w-full rounded-xl object-cover sm:h-40 lg:h-48" />
 					</div>
 				</div>
 			</section>
