@@ -1,24 +1,10 @@
 import { useEffect, useRef } from "react";
 
-const MAX_DPR = 2;
-
-const PUFF_UP = 0.34;
-const PUFF_DOWN = 0.19;
-const ERODE = 0.7;
-const SHADOW_STEP = 0.085;
-const NEAR_CELL = 1.05;
-const FAR_CELL = 2.15;
-const FAR_MIX = 0.55;
-const NEAR_DRIFT = 0.055;
-const FAR_DRIFT = 0.026;
-const CIRRUS_DRIFT = 0.014;
-
-const PUFF_WMAX = 2.15;
-const SHADE_BLEND = 12.0;
+const MAX_DPR = 1.5; // Capped DPR to prevent heavy 4K rendering lag
 
 const VERT_SRC = `
 attribute vec2 a_pos;
-void main(){ gl_Position = vec4(a_pos, 0.0, 1.0); }
+void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }
 `;
 
 const FRAG_SRC = `
@@ -34,30 +20,29 @@ uniform float uCoverage, uSize, uSoftness, uShadow, uCirrus;
 uniform vec3 uZenith, uHorizon, uCloud;
 uniform vec4 uGlow;
 uniform vec2 uSun;
-uniform vec2 uParallax;
 
-vec2 hash22(vec2 p){
+vec2 hash22(vec2 p) {
   vec3 q = fract(vec3(p.xyx) * vec3(0.1031, 0.1030, 0.0973));
   q += dot(q, q.yzx + 33.33);
   return fract((q.xx + q.yz) * q.zy);
 }
 
-float hash12(vec2 p){
+float hash12(vec2 p) {
   vec3 q = fract(vec3(p.xyx) * 0.1031);
   q += dot(q, q.yzx + 33.33);
   return fract((q.x + q.y) * q.z);
 }
 
-float vnoise(vec2 x){
+float vnoise(vec2 x) {
   vec2 i = floor(x), f = fract(x);
   f = f * f * (3.0 - 2.0 * f);
   return mix(mix(hash12(i), hash12(i + vec2(1.0, 0.0)), f.x),
              mix(hash12(i + vec2(0.0, 1.0)), hash12(i + vec2(1.0, 1.0)), f.x), f.y);
 }
 
-float fbm(vec2 p){
+float fbm(vec2 p) {
   float a = 0.5, s = 0.0;
-  for (int i = 0; i < 4; i++){
+  for (int i = 0; i < 3; i++) {
     s += a * vnoise(p);
     p *= 2.03;
     a *= 0.5;
@@ -65,35 +50,33 @@ float fbm(vec2 p){
   return s;
 }
 
-vec2 blobs(vec2 uv, float seed){
+vec2 blobs(vec2 uv, float seed) {
   vec2 id = floor(uv), f = fract(uv);
-
   float best = -1e4;
   float wsum = 0.0, ysum = 0.0;
-  float wMax = min(${PUFF_WMAX.toFixed(3)}, 0.72 * uSize);
-  float reach = min(2.0, ceil(wMax + 0.85) - 1.0);
-  for (int j = -2; j <= 2; j++){
-    for (int i = -2; i <= 2; i++){
+
+  for (int j = -1; j <= 1; j++) {
+    for (int i = -1; i <= 1; i++) {
       vec2 o = vec2(float(i), float(j));
-      if (max(abs(o.x), abs(o.y)) > reach) continue;
       vec2 h = hash22(id + o + seed);
 
       if (fract(h.x * 37.1) > uCoverage) continue;
       vec2 c = o + 0.15 + h * 0.7;
-      float w = min(${PUFF_WMAX.toFixed(3)}, (0.30 + 0.42 * fract(h.y * 19.7)) * uSize);
+      float w = min(2.15, (0.30 + 0.42 * fract(h.y * 19.7)) * uSize);
       vec2 d = f - c;
 
-      float ry = (d.y > 0.0 ? ${PUFF_UP.toFixed(3)} : ${PUFF_DOWN.toFixed(3)}) * uSize * (0.8 + 0.5 * fract(h.y * 7.3));
+      float ry = (d.y > 0.0 ? 0.34 : 0.19) * uSize * (0.8 + 0.5 * fract(h.y * 7.3));
       float e = length(vec2(d.x / max(w, 1e-3), d.y / max(ry, 1e-3)));
       float val = 1.0 - e;
       float yN = d.y / max(ry, 1e-3);
-      if (val > best){
-        float k = exp(${SHADE_BLEND.toFixed(1)} * (best - val));
+      
+      float k = exp(12.0 * (best - val));
+      if (val > best) {
         wsum = wsum * k + 1.0;
         ysum = ysum * k + yN;
         best = val;
       } else {
-        float g = exp(${SHADE_BLEND.toFixed(1)} * (val - best));
+        float g = exp(12.0 * (val - best));
         wsum += g;
         ysum += g * yN;
       }
@@ -102,21 +85,19 @@ vec2 blobs(vec2 uv, float seed){
   return vec2(best, ysum / max(wsum, 1e-4));
 }
 
-vec2 cloudField(vec2 uv, float seed, float detailScale){
+vec2 cloudField(vec2 uv, float seed, float detailScale) {
   vec2 b = blobs(uv, seed);
-
-  float n = fbm(uv * detailScale + seed * 3.1) * 0.72
-          + fbm(uv * detailScale * 3.3 + seed * 7.7) * 0.28;
-  return vec2(b.x - (1.0 - n) * ${ERODE.toFixed(3)}, b.y);
+  float n = fbm(uv * detailScale + seed * 3.1) * 0.72 + fbm(uv * detailScale * 3.3 + seed * 7.7) * 0.28;
+  return vec2(b.x - (1.0 - n) * 0.7, b.y);
 }
 
-vec3 shadeCloud(float dyNorm, vec3 sky){
+vec3 shadeCloud(float dyNorm, vec3 sky) {
   float t = smoothstep(-0.95, 0.25, dyNorm);
   vec3 base = mix(uCloud * 0.52, sky, 0.34);
   return mix(mix(uCloud, base, uShadow), uCloud, t);
 }
 
-void main(){
+void main() {
   vec2 frag = gl_FragCoord.xy / max(uRes.y, 1.0);
   float aspect = uRes.x / max(uRes.y, 1.0);
   vec2 p = vec2(frag.x, frag.y);
@@ -126,7 +107,6 @@ void main(){
   float sd = length(p - sunP);
 
   sky += uGlow.rgb * uGlow.a * exp(-sd * 3.4) * 0.30;
-
   vec3 col = sky;
 
   if (uCirrus > 0.0) {
@@ -136,23 +116,23 @@ void main(){
     col = mix(col, uCloud, veil * uCirrus * 0.5);
   }
 
-  vec2 fuv = vec2(p.x + uFarX, p.y) * ${FAR_CELL.toFixed(3)} + uParallax * 0.4;
+  // Far layer
+  vec2 fuv = vec2(p.x + uFarX, p.y) * 2.15;
   vec2 fd = cloudField(fuv, 17.0, 11.0);
   float fa = clamp(fd.x * uSoftness, 0.0, 1.0);
   if (fa > 0.0) {
     vec3 lit = shadeCloud(fd.y, sky);
-    col = mix(col, mix(lit, sky, ${FAR_MIX.toFixed(3)}), fa);
+    col = mix(col, mix(lit, sky, 0.55), fa);
   }
 
-  vec2 nuv = vec2(p.x + uNearX, p.y) * ${NEAR_CELL.toFixed(3)} + uParallax;
+  // Near layer
+  vec2 nuv = vec2(p.x + uNearX, p.y) * 1.05;
   vec2 nd = cloudField(nuv, 3.0, 8.5);
   float na = clamp(nd.x * uSoftness, 0.0, 1.0);
   if (na > 0.0) {
     vec3 lit = shadeCloud(nd.y, sky);
-
-    float above = clamp(cloudField(nuv + vec2(0.0, ${SHADOW_STEP.toFixed(3)}), 3.0, 8.5).x * uSoftness, 0.0, 1.0);
+    float above = clamp(cloudField(nuv + vec2(0.0, 0.085), 3.0, 8.5).x * uSoftness, 0.0, 1.0);
     lit *= 1.0 - 0.18 * uShadow * above;
-
     lit += uGlow.rgb * uGlow.a * 0.22 * exp(-length(p - sunP) * 1.6);
     col = mix(col, lit, na);
   }
@@ -167,7 +147,7 @@ function compile(gl, type, src) {
   gl.shaderSource(sh, src);
   gl.compileShader(sh);
   if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
-    console.error("CloudSky shader:", gl.getShaderInfoLog(sh));
+    console.error("CloudSky shader compile error:", gl.getShaderInfoLog(sh));
     gl.deleteShader(sh);
     return null;
   }
@@ -193,7 +173,6 @@ function parseColor(input, fb) {
     }
     return fb;
   }
-
   const match = str.match(/[\d.]+/g);
   if (match && match.length >= 3) {
     return [
@@ -216,7 +195,6 @@ function clampN(value, min, max) {
 
 const CLOUD_DEFAULTS = { softness: 100, shadow: 100, cirrus: 45 };
 const SUN_DEFAULTS = { x: 78, y: 92, glow: "rgba(232, 243, 255, 0.9)" };
-const POINTER_DEFAULTS = { parallax: 100, wind: 100, damping: 20 };
 
 export default function CloudSky(props) {
   const {
@@ -229,18 +207,15 @@ export default function CloudSky(props) {
     size = 130,
     clouds,
     sun,
-    pointer,
     width,
     height,
   } = props;
 
   const clouds_ = { ...CLOUD_DEFAULTS, ...(clouds || {}) };
   const sun_ = { ...SUN_DEFAULTS, ...(sun || {}) };
-  const pointer_ = { ...POINTER_DEFAULTS, ...(pointer || {}) };
 
   const canvasRef = useRef(null);
   const sizeRef = useRef({ w: 0, h: 0 });
-  const ptrRef = useRef({ x: 0, y: 0, inside: false });
   const vRef = useRef({
     zenith: background,
     horizon: baseColor,
@@ -254,36 +229,51 @@ export default function CloudSky(props) {
     cirrus: clampN(num(clouds_.cirrus, 45), 0, 100) / 100,
     sunX: clampN(num(sun_.x, 78), 0, 100) / 100,
     sunY: clampN(num(sun_.y, 92), 0, 100) / 100,
-    parallax: clampN(num(pointer_.parallax, 100), 0, 300) / 100,
-    wind: clampN(num(pointer_.wind, 100), 0, 300) / 100,
-    damping: clampN(num(pointer_.damping, 20), 1, 100),
   });
+
+  // Keep state reference sync with latest prop updates
+  useEffect(() => {
+    vRef.current = {
+      zenith: background,
+      horizon: baseColor,
+      cloud: accentColor,
+      glow: sun_.glow,
+      coverage: clampN(num(density, 55), 0, 100) / 100,
+      speed: clampN(num(speed, 50), 0, 100) / 50,
+      size: clampN(num(size, 100), 20, 300) / 100,
+      softness: 4.5 / Math.max(0.15, clampN(num(clouds_.softness, 100), 20, 300) / 100),
+      shadow: clampN(num(clouds_.shadow, 100), 0, 200) / 100,
+      cirrus: clampN(num(clouds_.cirrus, 45), 0, 100) / 100,
+      sunX: clampN(num(sun_.x, 78), 0, 100) / 100,
+      sunY: clampN(num(sun_.y, 92), 0, 100) / 100,
+    };
+  }, [background, baseColor, accentColor, density, speed, size, clouds, sun]);
 
   sizeRef.current = { w: num(width, 0), h: num(height, 0) };
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return undefined;
+    if (!canvas) return;
 
-    const gl = canvas.getContext("webgl", { alpha: false, antialias: false, depth: false });
-    if (!gl) {
-      console.error("CloudSky: WebGL unavailable");
-      return undefined;
-    }
+    const gl = canvas.getContext("webgl", {
+      alpha: false,
+      antialias: false,
+      depth: false,
+      powerPreference: "high-performance",
+    });
+    if (!gl) return;
 
     const vs = compile(gl, gl.VERTEX_SHADER, VERT_SRC);
     const fs = compile(gl, gl.FRAGMENT_SHADER, FRAG_SRC);
-    if (!vs || !fs) return undefined;
+    if (!vs || !fs) return;
 
     const prog = gl.createProgram();
-    if (!prog) return undefined;
+    if (!prog) return;
     gl.attachShader(prog, vs);
     gl.attachShader(prog, fs);
     gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-      console.error("CloudSky link:", gl.getProgramInfoLog(prog));
-      return undefined;
-    }
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+
     gl.useProgram(prog);
 
     const buf = gl.createBuffer();
@@ -301,39 +291,30 @@ export default function CloudSky(props) {
 
     let raf = 0;
     let last = performance.now();
-
     let nearX = 0;
     let farX = 0;
     let cirrusX = 0;
-    let leanX = 0;
-    let leanY = 0;
 
     const render = (now) => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       const v = vRef.current;
-      const p = ptrRef.current;
 
-      const k = 1 - Math.exp(-(v.damping) * 0.12 * dt);
-      leanX += ((p.inside ? p.x : 0) - leanX) * k;
-      leanY += ((p.inside ? p.y : 0) - leanY) * k;
-
-      const gust = 1 + leanX * v.wind;
-      const rate = v.speed * gust;
-      nearX = (nearX - NEAR_DRIFT * rate * dt) % 1000;
-      farX = (farX - FAR_DRIFT * rate * dt) % 1000;
-      cirrusX = (cirrusX - CIRRUS_DRIFT * rate * dt) % 1000;
+      nearX = (nearX - 0.055 * v.speed * dt) % 1000;
+      farX = (farX - 0.026 * v.speed * dt) % 1000;
+      cirrusX = (cirrusX - 0.014 * v.speed * dt) % 1000;
 
       const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
       const cw = sizeRef.current.w || canvas.clientWidth || 1200;
       const ch = sizeRef.current.h || canvas.clientHeight || 800;
       const bw = Math.max(1, Math.round(cw * dpr));
       const bh = Math.max(1, Math.round(ch * dpr));
+
       if (canvas.width !== bw || canvas.height !== bh) {
         canvas.width = bw;
         canvas.height = bh;
+        gl.viewport(0, 0, bw, bh);
       }
-      gl.viewport(0, 0, bw, bh);
 
       const zen = parseColor(v.zenith, [0.369, 0.576, 0.824, 1]);
       const hor = parseColor(v.horizon, [0.706, 0.824, 0.941, 1]);
@@ -350,7 +331,6 @@ export default function CloudSky(props) {
       gl.uniform1f(u("uShadow"), v.shadow);
       gl.uniform1f(u("uCirrus"), v.cirrus);
       gl.uniform2f(u("uSun"), v.sunX, v.sunY);
-      gl.uniform2f(u("uParallax"), -leanX * v.parallax * 0.07, -leanY * v.parallax * 0.05);
       gl.uniform3f(u("uZenith"), zen[0], zen[1], zen[2]);
       gl.uniform3f(u("uHorizon"), hor[0], hor[1], hor[2]);
       gl.uniform3f(u("uCloud"), cld[0], cld[1], cld[2]);
@@ -360,28 +340,10 @@ export default function CloudSky(props) {
       raf = requestAnimationFrame(render);
     };
 
-    const track = (event) => {
-      const rect = canvas.getBoundingClientRect();
-      if (rect.width <= 0 || rect.height <= 0) return;
-      ptrRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      ptrRef.current.y = 1 - ((event.clientY - rect.top) / rect.height) * 2;
-      ptrRef.current.inside = true;
-    };
-    const onLeave = () => {
-      ptrRef.current.inside = false;
-    };
-
-    canvas.addEventListener("pointermove", track);
-    canvas.addEventListener("pointerenter", track);
-    canvas.addEventListener("pointerleave", onLeave);
-
     raf = requestAnimationFrame(render);
 
     return () => {
       cancelAnimationFrame(raf);
-      canvas.removeEventListener("pointermove", track);
-      canvas.removeEventListener("pointerenter", track);
-      canvas.removeEventListener("pointerleave", onLeave);
       gl.deleteProgram(prog);
       gl.deleteShader(vs);
       gl.deleteShader(fs);
@@ -395,8 +357,6 @@ export default function CloudSky(props) {
         overflow: "hidden",
         background,
         isolation: "isolate",
-        minWidth: 1200,
-        minHeight: 800,
         width: typeof width === "number" && width > 0 ? width : "100%",
         height: typeof height === "number" && height > 0 ? height : "100%",
         ...style,
