@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useScrollEffects } from "../hooks/useScrollEffects";
+import CloudSky from "./CloudSky.jsx";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -31,6 +32,30 @@ export default function Hero() {
             style={heroStyle}
             className="sticky top-16 z-0 overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 bg-gradient-to-b from-blue-50/50 via-white to-blue-50/30 text-gray-900 will-change-opacity relative"
         >
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <CloudSky
+                    background="#eff6ff"
+                    baseColor="#cfe4ff"
+                    accentColor="#ffffff"
+                    density={100}
+                    speed={64}
+                    size={150}
+                    clouds={{ softness: 120, shadow: 100, cirrus: 55 }}
+                    sun={{ x: 78, y: 82, glow: "rgba(191, 219, 254, 0.9)" }}
+                    pointer={{ parallax: 120, wind: 120, damping: 18 }}
+                    style={{
+                        position: "absolute",
+                        inset: 0,
+                        width: "100%",
+                        height: "100%",
+                        minWidth: "100%",
+                        minHeight: "100%",
+                        transform: "scale(1.25)",
+                        filter: "saturate(1.3) brightness(1.05)"
+                    }}
+                />
+            </div>
+
             <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -44,8 +69,6 @@ export default function Hero() {
                 transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/3 w-[90vw] max-w-[550px] h-[40vw] max-h-[300px] bg-blue-200/40 sm:bg-blue-100/50 rounded-full blur-3xl pointer-events-none z-0"
             />
-
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#2563eb15_1px,transparent_1px),linear-gradient(to_bottom,#2563eb15_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
             <motion.div
                 initial={{ opacity: 0, x: 24, y: 10 }}
