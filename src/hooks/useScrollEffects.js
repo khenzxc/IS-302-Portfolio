@@ -1,38 +1,50 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useScrollEffects(fadeDistance = 500) {
+  const sectionRef = useRef(null);
   const frameRef = useRef(null);
-  const lastScrollYRef = useRef(0);
-
-  const [scrollY, setScrollY] = useState(0);
+  const isActiveRef = useRef(true);
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-    const handleScroll = () => {
-      if (prefersReducedMotion) {
-        return;
+    const applyScrollPosition = () => {
+      const scrollY = window.scrollY || 0;
+      const opacity = Math.max(1 - scrollY / fadeDistance, 0);
+      const nextIsActive = opacity > 0;
+
+      if (sectionRef.current) {
+        sectionRef.current.style.opacity = String(opacity);
       }
 
-      const nextScrollY = window.scrollY || 0;
-      if (Math.abs(nextScrollY - lastScrollYRef.current) < 4) return;
+      if (nextIsActive !== isActiveRef.current) {
+        isActiveRef.current = nextIsActive;
+        setIsActive(nextIsActive);
+      }
+    };
 
-      lastScrollYRef.current = nextScrollY;
+    if (prefersReducedMotion) {
+      if (sectionRef.current) sectionRef.current.style.opacity = "1";
+      isActiveRef.current = false;
+      setIsActive(false);
+      return undefined;
+    }
 
+    const handleScroll = () => {
       if (frameRef.current !== null) return;
 
       frameRef.current = window.requestAnimationFrame(() => {
-        setScrollY(nextScrollY);
+        applyScrollPosition();
         frameRef.current = null;
       });
     };
 
-    if (prefersReducedMotion) {
-      return () => {};
-    }
-
+    applyScrollPosition();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
@@ -41,8 +53,7 @@ export function useScrollEffects(fadeDistance = 500) {
       }
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [fadeDistance]);
 
-  const opacity = Math.max(1 - scrollY / fadeDistance, 0);
-  return { opacity };
+  return { sectionRef, isActive };
 }

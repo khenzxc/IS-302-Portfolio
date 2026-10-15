@@ -15,8 +15,8 @@ export default function Navbar() {
 
   const navItems = [
     { to: "/", label: "Overview", end: true },
-    { to: "/about", label: "About Us" },
     { to: "/activities", label: "Activities" },
+    { to: "/projects", label: "Project" },
   ];
 
   return (
@@ -75,10 +75,10 @@ export default function Navbar() {
 
           <div className="flex items-center gap-3">
             <Link
-              to="/projects"
+              to="/about"
               className="hidden sm:inline-flex px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider border border-blue-500/50 shadow-sm shadow-blue-500/25 transition-all hover:from-blue-700 hover:to-indigo-700 hover:shadow-md hover:shadow-blue-500/30"
             >
-              BSIS Project
+              About Us
             </Link>
 
             <button
@@ -124,11 +124,11 @@ export default function Navbar() {
 
             <div className="pt-2 border-t border-slate-200/50">
               <Link
-                to="/projects"
+                to="/about"
                 onClick={() => setIsOpen(false)}
                 className="inline-block w-full text-center py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider border border-blue-500/50 shadow-sm shadow-blue-500/25 transition-all hover:from-blue-700 hover:to-indigo-700 hover:shadow-md hover:shadow-blue-500/30"
               >
-                BSIS Project
+                About Us
               </Link>
             </div>
           </div>

@@ -76,7 +76,7 @@ export default function FeaturedWorks() {
           variants={gridContainerVariants}
           className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
         >
-          {activityList.map((activity) => (
+          {activityList.slice(0, 2).map((activity) => (
             <motion.div 
               key={activity.slug}
               variants={cardVariants}
@@ -133,6 +133,28 @@ export default function FeaturedWorks() {
           ))}
         </motion.div>
 
+        <div className="mt-10 text-center">
+          <Link
+            to="/activities"
+            className="inline-flex items-center rounded-full border border-sky-400/50 px-6 py-3 text-sm font-semibold text-sky-300 transition-colors hover:border-sky-300 hover:bg-sky-400/10 hover:text-white"
+          >
+            View More
+            <svg
+              className="ml-2 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </Link>
+        </div>
       </div>
     </section>
   );

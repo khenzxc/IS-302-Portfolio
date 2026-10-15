@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 
-const MAX_DPR = 1.5; // Capped DPR to prevent heavy 4K rendering lag
+// The fragment shader runs for every canvas pixel on every frame. A 1x cap
+// keeps the animated hero background much lighter on high-DPI displays.
+const MAX_DPR = 1;
 
 const VERT_SRC = `
 attribute vec2 a_pos;
@@ -209,6 +211,7 @@ export default function CloudSky(props) {
     sun,
     width,
     height,
+    active = true,
   } = props;
 
   const clouds_ = { ...CLOUD_DEFAULTS, ...(clouds || {}) };
@@ -216,6 +219,9 @@ export default function CloudSky(props) {
 
   const canvasRef = useRef(null);
   const sizeRef = useRef({ w: 0, h: 0 });
+  const activeRef = useRef(active);
+  const animationControlRef = useRef(null);
+  activeRef.current = active;
   const vRef = useRef({
     zenith: background,
     horizon: baseColor,
@@ -289,13 +295,16 @@ export default function CloudSky(props) {
       return locs[name];
     };
 
-    let raf = 0;
+    let raf = null;
     let last = performance.now();
     let nearX = 0;
     let farX = 0;
     let cirrusX = 0;
 
     const render = (now) => {
+      raf = null;
+      if (!activeRef.current || document.hidden) return;
+
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       const v = vRef.current;
@@ -340,15 +349,40 @@ export default function CloudSky(props) {
       raf = requestAnimationFrame(render);
     };
 
-    raf = requestAnimationFrame(render);
+    const start = () => {
+      if (raf !== null || !activeRef.current || document.hidden) return;
+      last = performance.now();
+      raf = requestAnimationFrame(render);
+    };
+
+    const stop = () => {
+      if (raf === null) return;
+      cancelAnimationFrame(raf);
+      raf = null;
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+
+    animationControlRef.current = { start, stop };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      animationControlRef.current = null;
       gl.deleteProgram(prog);
       gl.deleteShader(vs);
       gl.deleteShader(fs);
     };
   }, []);
+
+  useEffect(() => {
+    if (active) animationControlRef.current?.start();
+    else animationControlRef.current?.stop();
+  }, [active]);
 
   return (
     <div

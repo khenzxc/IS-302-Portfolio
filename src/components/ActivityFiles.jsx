@@ -21,8 +21,8 @@ function EmbeddedFrame({ title, src, className }) {
 }
 
 export default function ActivityFiles({ activity }) {
-	const { document, canva, video } = activity.files;
-	const hasFiles = document || canva || video;
+	const { diagram, document, canva, video } = activity.files;
+	const hasFiles = diagram || document || canva || video;
 
 	if (!hasFiles) {
 		return <p className="border border-dashed border-slate-300 px-5 py-8 text-sm text-slate-500">No files have been added for this activity yet.</p>;
@@ -30,6 +30,19 @@ export default function ActivityFiles({ activity }) {
 
 	return (
 		<div className="mt-8 space-y-8">
+			{diagram && (
+				<div>
+					<FileHeading title="BPMN diagram" label="process model" />
+					<div className="w-full overflow-hidden rounded-lg border border-slate-300 bg-white shadow-sm">
+						<EmbeddedFrame
+							title={`${activity.title} BPMN diagram`}
+							src={diagram}
+							className="block h-[68vh] min-h-[420px] max-h-[620px] w-full sm:aspect-[8.5/11] sm:h-auto sm:min-h-0 sm:max-h-[80vh]"
+						/>
+					</div>
+				</div>
+			)}
+
 			{document && (
 				<div>
 					<FileHeading title="PDF documentation" label="submitted PDF" />

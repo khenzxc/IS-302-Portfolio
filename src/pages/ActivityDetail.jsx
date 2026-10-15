@@ -68,7 +68,7 @@ export default function ActivityDetail() {
 
 					<div className="mx-auto mt-10 max-w-5xl sm:mt-12">
 						<span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Activity files</span>
-						<h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950">Submitted document</h2>
+						<h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950">Activity deliverables</h2>
 						<p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">Available submitted materials for this activity are shown directly below.</p>
 						<ActivityFiles activity={activity} />
 					</div>

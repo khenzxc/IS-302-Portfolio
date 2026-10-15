@@ -18,7 +18,7 @@ export default function Activities() {
 					</div>
 
 					<div className="mt-6 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
-						<div className="border-l border-sky-300/30 pl-3"><strong className="block text-xl font-black text-white">03</strong><span className="text-[11px] text-blue-200/70">Core activities</span></div>
+						<div className="border-l border-sky-300/30 pl-3"><strong className="block text-xl font-black text-white">05</strong><span className="text-[11px] text-blue-200/70">Core activities</span></div>
 						<div className="border-l border-sky-300/30 pl-3"><strong className="block text-xl font-black text-white">02</strong><span className="text-[11px] text-blue-200/70">Process states</span></div>
 						<div className="border-l border-sky-300/30 pl-3"><strong className="block text-xl font-black text-white">01</strong><span className="text-[11px] text-blue-200/70">Prototype</span></div>
 						<div className="border-l border-sky-300/30 pl-3"><strong className="block text-xl font-black text-white">IS-302</strong><span className="text-[11px] text-blue-200/70">Course focus</span></div>
@@ -26,7 +26,9 @@ export default function Activities() {
 				</div>
 			</section>
 
-			<section className="px-6 py-10 sm:py-16" id="activities-list">
+			<section className="relative overflow-hidden bg-gradient-to-b from-white via-blue-50/70 to-white px-6 py-10 sm:py-16" id="activities-list">
+				<div className="pointer-events-none absolute -left-28 top-36 h-72 w-72 rounded-full bg-sky-200/30 blur-3xl" />
+				<div className="pointer-events-none absolute -right-28 bottom-10 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl" />
 				<div className="mx-auto max-w-7xl">
 					<div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
 						<div>
@@ -36,23 +38,25 @@ export default function Activities() {
 						<p className="max-w-sm text-sm leading-6 text-slate-500">Each activity builds on the last, keeping the final solution grounded in the way work actually happens.</p>
 					</div>
 
-					<div className="grid gap-5 lg:grid-cols-3">
-						{activityList.map(({ number, displayName, slug, label, title, description, image, tags }, index) => (
-							<Link to={`/activities/${slug}`} key={title} className={`flex min-h-[360px] flex-col justify-between overflow-hidden rounded-2xl border border-blue-200 p-6 shadow-sm transition-shadow hover:border-blue-400 hover:shadow-md ${index === 1 ? "bg-[#eef5ff]" : "bg-slate-50/70"}`}>
-								<div className="relative -mx-6 -mt-6 mb-6 h-44 overflow-hidden">
+					<div className="relative grid gap-5 lg:grid-cols-3">
+						{activityList.map(({ number, displayName, slug, label, title, description, image, tags }) => (
+							<Link to={`/activities/${slug}`} key={title} className="group flex min-h-[380px] flex-col justify-between overflow-hidden rounded-2xl border border-blue-200/80 bg-gradient-to-br from-white via-blue-50 to-sky-100/80 p-6 shadow-[0_12px_35px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-[0_20px_45px_rgba(37,99,235,0.18)]">
+								<div className="relative -mx-6 -mt-6 mb-6 h-48 overflow-hidden">
 									<img src={image} alt={`${title} activity`} className="h-full w-full object-cover" />
-									<div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent" />
-									<span className="absolute bottom-4 left-4 text-4xl font-black tracking-tight text-white/90">{number}</span>
+									<div className="absolute inset-0 bg-gradient-to-t from-[#061a39]/80 via-[#061a39]/10 to-transparent transition-colors group-hover:from-blue-950/80" />
+									<span className="absolute bottom-4 left-4 rounded-lg border border-white/30 bg-blue-950/70 px-3 py-1 text-3xl font-black tracking-tight text-white shadow-lg backdrop-blur-sm">{number}</span>
+									<span className="absolute right-4 top-4 rounded-full border border-white/40 bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-blue-800 shadow-sm">{label}</span>
 								</div>
 								<div>
-									<div className="mb-5"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">{displayName}</span></div>
-									<span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">{label}</span>
-									<h3 className="mt-2 text-xl font-extrabold tracking-tight text-slate-950">{title}</h3>
+									<div className="mb-3"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-500">{displayName}</span></div>
+									<h3 className="text-xl font-extrabold tracking-tight text-slate-950 transition-colors group-hover:text-blue-800">{title}</h3>
 									<p className="mt-3 text-sm leading-6 text-slate-600">{description}</p>
 								</div>
-								<div className="mt-8 flex flex-wrap items-center gap-2 border-t border-slate-200/80 pt-4">
-									{tags.map((tag) => <span key={tag} className="rounded-md bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">{tag}</span>)}
-									<ArrowUpRight className="ml-auto h-5 w-5 text-blue-500" />
+								<div className="mt-8 flex flex-wrap items-center gap-2 border-t border-blue-200/70 pt-4">
+									{tags.map((tag) => <span key={tag} className="rounded-full border border-blue-200/80 bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-blue-700">{tag}</span>)}
+									<span className="ml-auto flex h-9 w-9 items-center justify-center rounded-full bg-blue-700 text-white shadow-md transition-all group-hover:translate-x-1 group-hover:bg-blue-800">
+										<ArrowUpRight className="h-5 w-5" />
+									</span>
 								</div>
 							</Link>
 						))}

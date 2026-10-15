@@ -10,11 +10,11 @@ export default function ClosingQuote() {
           className="text-2xl font-normal italic leading-relaxed tracking-normal text-slate-900 sm:text-4xl lg:text-5xl"
           style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
         >
-          “At first, dreams seem impossible, then improbable, and eventually inevitable.”
+          “The roots of education are bitter, but the fruit is sweet”
         </blockquote>
 
         <p className="mt-8 text-base font-medium tracking-[0.2em] text-slate-600 uppercase sm:text-lg">
-          — Marcus Aurelius
+          — Aristotle
         </p>
       </div>
     </section>

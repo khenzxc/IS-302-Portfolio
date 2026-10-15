@@ -7,8 +7,8 @@ const containerVariants = {
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.15,
-            delayChildren: 0.2,
+            staggerChildren: 0.1,
+            delayChildren: 0.08,
         },
     },
 };
@@ -18,31 +18,30 @@ const itemVariants = {
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.6, ease: "easeOut" },
+        transition: { duration: 0.4, ease: "easeOut" },
     },
 };
 
 export default function Hero() {
-    const { opacity } = useScrollEffects();
-
-    const heroStyle = { opacity };
+    const { sectionRef, isActive } = useScrollEffects();
 
     return (
         <section
-            style={heroStyle}
-            className="sticky top-16 z-0 overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 bg-gradient-to-b from-blue-50/50 via-white to-blue-50/30 text-gray-900 will-change-opacity relative"
+            ref={sectionRef}
+            className="sticky top-16 z-0 overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 bg-gradient-to-b from-sky-100 via-blue-50 to-sky-200/60 text-gray-900 will-change-opacity relative"
         >
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <CloudSky
-                    background="#eff6ff"
-                    baseColor="#cfe4ff"
+                    active={isActive}
+                    background="#bfdbfe"
+                    baseColor="#dbeafe"
                     accentColor="#ffffff"
-                    density={100}
-                    speed={64}
-                    size={150}
+                    density={72}
+                    speed={28}
+                    size={125}
                     clouds={{ softness: 120, shadow: 100, cirrus: 55 }}
-                    sun={{ x: 78, y: 82, glow: "rgba(191, 219, 254, 0.9)" }}
-                    pointer={{ parallax: 120, wind: 120, damping: 18 }}
+                    sun={{ x: 78, y: 82, glow: "rgba(147, 197, 253, 0.75)" }}
+                    pointer={{ parallax: 45, wind: 35, damping: 18 }}
                     style={{
                         position: "absolute",
                         inset: 0,
@@ -57,23 +56,23 @@ export default function Hero() {
             </div>
 
             <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-[650px] h-[85vw] max-h-[650px] bg-blue-200/50 sm:bg-blue-100/60 rounded-full blur-3xl pointer-events-none z-0"
             />
 
             <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/3 w-[90vw] max-w-[550px] h-[40vw] max-h-[300px] bg-blue-200/40 sm:bg-blue-100/50 rounded-full blur-3xl pointer-events-none z-0"
             />
 
             <motion.div
                 initial={{ opacity: 0, x: 24, y: 10 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+                transition={{ duration: 0.55, delay: 0.35, ease: "easeOut" }}
                 className="absolute right-[5%] top-[18%] hidden w-52 rotate-3 rounded-2xl border border-white/80 bg-white/55 p-4 text-left shadow-[0_20px_60px_rgba(37,99,235,0.14)] backdrop-blur-xl lg:block pointer-events-none z-1"
             >
                 <div className="flex items-center justify-between">
@@ -98,7 +97,7 @@ export default function Hero() {
             <motion.div
                 initial={{ opacity: 0, x: -20, y: 12 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
+                transition={{ duration: 0.55, delay: 0.45, ease: "easeOut" }}
                 className="absolute bottom-[18%] left-[6%] hidden w-44 -rotate-3 rounded-2xl border border-white/80 bg-white/50 p-4 text-left shadow-[0_20px_60px_rgba(37,99,235,0.12)] backdrop-blur-xl lg:block pointer-events-none z-1"
             >
                 <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Project status</span>

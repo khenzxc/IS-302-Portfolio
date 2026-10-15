@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 
 const TOP_ROW_INSIGHTS = [
   {
@@ -58,6 +58,9 @@ const BOTTOM_ROW_INSIGHTS = [
 ];
 
 export default function PeerInsights() {
+  const sectionRef = useRef(null);
+  const scrollResumeTimerRef = useRef(null);
+  const [isInView, setIsInView] = useState(false);
   const [isPausedRow1, setIsPausedRow1] = useState(false);
   const [isPausedRow2, setIsPausedRow2] = useState(false);
 
@@ -70,20 +73,46 @@ export default function PeerInsights() {
     []
   );
 
-  const resumeAll = useCallback(() => {
-    setIsPausedRow1(false);
-    setIsPausedRow2(false);
+  const pauseWhileScrolling = useCallback(() => {
+    setIsPausedRow1(true);
+    setIsPausedRow2(true);
+
+    window.clearTimeout(scrollResumeTimerRef.current);
+    scrollResumeTimerRef.current = window.setTimeout(() => {
+      setIsPausedRow1(false);
+      setIsPausedRow2(false);
+      scrollResumeTimerRef.current = null;
+    }, 140);
   }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", resumeAll, { passive: true });
-    window.addEventListener("touchmove", resumeAll, { passive: true });
+    const section = sectionRef.current;
+    if (!section) return undefined;
+
+    if (!("IntersectionObserver" in window)) {
+      setIsInView(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: "100px 0px" }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", pauseWhileScrolling, { passive: true });
+    window.addEventListener("touchmove", pauseWhileScrolling, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", resumeAll);
-      window.removeEventListener("touchmove", resumeAll);
+      window.removeEventListener("scroll", pauseWhileScrolling);
+      window.removeEventListener("touchmove", pauseWhileScrolling);
+      window.clearTimeout(scrollResumeTimerRef.current);
     };
-  }, [resumeAll]);
+  }, [pauseWhileScrolling]);
 
   const handleMobileTouch = useCallback((row, e) => {
     if (!window.matchMedia("(pointer: coarse)").matches) return;
@@ -100,6 +129,7 @@ export default function PeerInsights() {
 
   return (
     <section
+      ref={sectionRef}
       id="insights"
       className="relative z-10 border-0 bg-white py-20 text-slate-900 overflow-hidden font-['Plus_Jakarta_Sans',sans-serif] select-none"
     >
@@ -120,9 +150,13 @@ export default function PeerInsights() {
           animation: marqueeLeft 35s linear infinite;
           will-change: transform;
         }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-marquee-right,
+          .animate-marquee-left {
+            animation: none;
+          }
+        }
       `}</style>
-
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-blue-100/60 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="hidden md:block absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
       <div className="hidden md:block absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
@@ -145,13 +179,13 @@ export default function PeerInsights() {
         <div className="flex overflow-hidden">
           <div
             className="flex gap-6 w-max animate-marquee-right"
-            style={{ animationPlayState: isPausedRow1 ? "paused" : "running" }}
+            style={{ animationPlayState: !isInView || isPausedRow1 ? "paused" : "running" }}
             onClick={(e) => handleMobileTouch(1, e)}
           >
             {topRowRepeated.map((item, index) => (
               <div
                 key={`top-${index}`}
-                className="w-[320px] sm:w-[380px] p-6 rounded-2xl bg-slate-50/90 border border-slate-200/80 backdrop-blur-md shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 flex-shrink-0 flex flex-col justify-between"
+                className="w-[320px] sm:w-[380px] p-6 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:border-blue-300 transition-colors duration-200 flex-shrink-0 flex flex-col justify-between"
               >
                 <div>
                   <QuoteIcon />
@@ -168,13 +202,13 @@ export default function PeerInsights() {
         <div className="flex overflow-hidden">
           <div
             className="flex gap-6 w-max animate-marquee-left"
-            style={{ animationPlayState: isPausedRow2 ? "paused" : "running" }}
+            style={{ animationPlayState: !isInView || isPausedRow2 ? "paused" : "running" }}
             onClick={(e) => handleMobileTouch(2, e)}
           >
             {bottomRowRepeated.map((item, index) => (
               <div
                 key={`bottom-${index}`}
-                className="w-[320px] sm:w-[380px] p-6 rounded-2xl bg-slate-50/90 border border-slate-200/80 backdrop-blur-md shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 flex-shrink-0 flex flex-col justify-between"
+                className="w-[320px] sm:w-[380px] p-6 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:border-blue-300 transition-colors duration-200 flex-shrink-0 flex flex-col justify-between"
               >
                 <div>
                   <QuoteIcon />
