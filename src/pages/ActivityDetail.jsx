@@ -36,7 +36,7 @@ export default function ActivityDetail() {
 							<h1 className="mt-2 max-w-3xl text-3xl font-black leading-[1.08] tracking-tight sm:text-5xl">{activity.title}</h1>
 							<p className="mt-3 max-w-xl text-xs leading-6 text-blue-100/75 sm:text-sm sm:leading-7">{activity.description}</p>
 						</div>
-						<img src={activity.image} alt="" className="h-32 w-full rounded-xl object-cover sm:h-40 lg:h-48" />
+						
 					</div>
 				</div>
 			</section>

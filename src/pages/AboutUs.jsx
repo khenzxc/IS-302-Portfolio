@@ -59,28 +59,28 @@ export default function AboutUs() {
 							const imageOnLeft = index === 0 || index % 2 !== 0;
 
 							return (
-								<article key={member.name} className={`grid grid-cols-1 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:border-blue-300 hover:shadow-md lg:h-56 lg:grid-cols-2 ${index === 0 ? "lg:col-span-2 lg:justify-self-center lg:w-[calc(50%-0.625rem)]" : ""} ${!imageOnLeft ? "lg:[&>div:first-child]:order-2" : ""}`}>
-									<div className="relative min-h-0 overflow-hidden bg-white">
+								<article key={member.name} className={`grid grid-cols-[5.5rem_minmax(0,1fr)] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:border-blue-300 hover:shadow-md sm:grid-cols-[8rem_minmax(0,1fr)] lg:h-56 lg:grid-cols-2 ${index === 0 ? "lg:col-span-2 lg:justify-self-center lg:w-[calc(50%-0.625rem)]" : ""} ${!imageOnLeft ? "lg:[&>div:first-child]:order-2" : ""}`}>
+									<div className="relative min-h-32 overflow-hidden bg-white sm:min-h-40 lg:min-h-0">
 										<img
 											src={member.image}
 											alt={member.name}
-											className="h-full w-full object-contain p-5 grayscale-[15%]"
+											className="h-full w-full object-contain p-2 grayscale-[15%] sm:p-4 lg:p-5"
 										/>
 									</div>
-									<div className="flex flex-col justify-center p-4 sm:p-5">
+									<div className="flex min-w-0 flex-col justify-center p-3 sm:p-5">
 										<span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">{member.role}</span>
-										<h3 className="mt-2 text-xl font-extrabold tracking-tight text-slate-950 sm:text-2xl">{member.name}</h3>
-										<p className="mt-2 max-w-lg text-sm leading-6 text-slate-600">{member.description}</p>
+										<h3 className="mt-1 text-base font-extrabold tracking-tight text-slate-950 sm:mt-2 sm:text-2xl">{member.name}</h3>
+										<p className="mt-1 text-xs leading-5 text-slate-600 sm:mt-2 sm:text-sm sm:leading-6">{member.description}</p>
 										<a
 											href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(member.email)}`}
 											target="_blank"
 											rel="noreferrer"
-											className="mt-3 inline-flex w-fit items-center gap-2 text-xs font-bold text-blue-600 transition-colors hover:text-blue-800"
+											className="mt-2 inline-flex min-w-0 items-center gap-1.5 break-all text-[10px] font-bold text-blue-600 transition-colors hover:text-blue-800 sm:mt-3 sm:gap-2 sm:text-xs"
 										>
-											<Mail className="h-3.5 w-3.5" />
+											<Mail className="h-3.5 w-3.5 shrink-0" />
 											{member.email}
 										</a>
-										<div className="mt-4 h-0.5 w-10 bg-blue-600" />
+										<div className="mt-2 h-0.5 w-8 bg-blue-600 sm:mt-4 sm:w-10" />
 									</div>
 								</article>
 							);
