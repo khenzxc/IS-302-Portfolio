@@ -6,54 +6,75 @@ const TOP_ROW_INSIGHTS = [
   {
     id: 1,
     quote: "Designing BPMN 2.0 diagrams helped us clearly visualize bottlenecks and streamline complex organizational workflows.",
-    name: "Khen Gabriel",
-    role: "Visual Creator, Team 1",
+    name: "Khen Vonoe Gabriel",
+    role: "Tech Coordinator",
     avatar: "khen.webp",
   },
   {
     id: 2,
     quote: "Understanding As-Is and To-Be process modeling was a game changer for eliminating redundant manual steps in our system.",
-    name: "Eldon Santos",
-    role: "Lead Researcher, Team 1",
-    avatar: "eldon.webp"
+    name: "Yuki Ezekiel Ablen",
+    role: "Team Leader",
+    avatar: "yuki.webp",
   },
   {
     id: 3,
-    quote: "Applying Root Cause and Gap Analysis allowed us to target real operational pain points instead of just treating symptoms.",
-    name: "Gabrielle Williams",
-    role: "Peer Collaborator, IS-302",
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=150&auto=format&fit=crop",
+    quote: "Integrating automation into business processes taught us how to significantly reduce cycle times and human error.",
+    name: "Simon Paul Bolus",
+    role: "Documentation Creator",
+    avatar: "simon.webp",
+  },
+  {
+    id: 4,
+    quote: "Clear process documentation makes it easier for everyone to understand each task, decision, and handoff.",
+    name: "Eldon Rex Santos",
+    role: "Process Researcher",
+    avatar: "eldon.webp",
+  },
+  {
+    id: 5,
+    quote: "Reviewing every step helped us spot gaps and make our process maps more accurate and consistent.",
+    name: "Kaiross Gabriel Sta Ana",
+    role: "Project Checker",
+    avatar: "kaiross.webp",
   },
 ];
 
 const BOTTOM_ROW_INSIGHTS = [
   {
-    id: 4,
-    quote: "Integrating automation into business processes taught us how to significantly reduce cycle times and human error.",
-    name: "Yuki Ezekiel",
-    role: "Team Leader, Team 1",
-    avatar: "yuki.webp"
-  },
-  {
-    id: 5,
-    quote: "Aligning Key Performance Indicators (KPIs) with process goals proved essential for measuring continuous improvement.",
-    name: "Simon Bolus",
-    role: "Lead Writer, Team 1",
-    avatar: "simon.webp"
-  },
-  {
     id: 6,
-    quote: "Standardizing workflows ensures seamless cross-functional collaboration between IT infrastructure and business units.",
-    name: "Kairos Sta Ana",
-    role: "Project Checker, Team 1",
-    avatar: "kaiross.webp",
+    quote: "Aligning Key Performance Indicators (KPIs) with process goals proved essential for measuring continuous improvement.",
+    name: "Eldon Rex Santos",
+    role: "Process Researcher",
+    avatar: "eldon.webp",
   },
   {
     id: 7,
-    quote: "BPM lifecycle management demonstrated how continuous monitoring turns static systems into adaptable solutions.",
-    name: "Natalie Martinez",
-    role: "Database Peer Evaluator",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop",
+    quote: "Standardizing workflows ensures seamless cross-functional collaboration between IT infrastructure and business units.",
+    name: "Kaiross Gabriel Sta Ana",
+    role: "Project Checker",
+    avatar: "kaiross.webp",
+  },
+  {
+    id: 8,
+    quote: "Choosing the right tools and keeping our digital files organized made collaboration and project updates smoother.",
+    name: "Khen Vonoe Gabriel",
+    role: "Tech Coordinator",
+    avatar: "khen.webp",
+  },
+  {
+    id: 9,
+    quote: "Setting shared goals and dividing responsibilities helped our team stay focused from planning through presentation.",
+    name: "Yuki Ezekiel Ablen",
+    role: "Team Leader",
+    avatar: "yuki.webp",
+  },
+  {
+    id: 10,
+    quote: "Organizing our findings clearly helped connect the research, process diagrams, and final project deliverables.",
+    name: "Simon Paul Bolus",
+    role: "Documentation Creator",
+    avatar: "simon.webp",
   },
 ];
 
